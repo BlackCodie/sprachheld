@@ -165,6 +165,17 @@
   .mcell.bad{border-color:var(--bad);background:rgba(255,93,122,0.25);}
   .mcell.hit{border-color:var(--good);background:rgba(52,224,161,0.25);}
   .confetti{position:fixed;top:-24px;font-size:22px;z-index:70;pointer-events:none;animation:fall linear forwards;}
+  #micbtn.listening{border-color:var(--accent);animation:micpulse 1.1s ease-in-out infinite;}
+  @keyframes micpulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(91,140,255,0.35);}50%{transform:scale(1.07);box-shadow:0 0 0 14px rgba(91,140,255,0);}}
+  .badgegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:10px;}
+  .badge2{text-align:center;padding:12px 6px;border-radius:14px;background:var(--glass);border:1px solid var(--stroke-soft);opacity:0.45;cursor:pointer;}
+  .badge2.on{opacity:1;background:var(--glass-strong);border-color:var(--stroke);}
+  .badge2 .be{font-size:26px;line-height:1.1;}
+  .badge2 .bt{font-size:10.5px;font-weight:800;margin-top:5px;color:var(--txt-dim);line-height:1.25;}
+  .badge2.on .bt{color:var(--txt);}
+  .tipbody ul{margin:8px 0 0;padding-left:20px;}
+  .tipbody li{margin:7px 0;}
+  .tipbody p{margin:0 0 6px;}
   @keyframes fall{to{transform:translateY(112vh) rotate(560deg);opacity:.85;}}
   .hero-card{display:flex;align-items:center;gap:16px;overflow:hidden;position:relative;}
   .hero-card::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(124,92,255,0.35),transparent 70%);pointer-events:none;}
@@ -11297,6 +11308,14 @@ const VOCAB=[
   {de:"die Korrelation",en:"correlation",cat:"Nouns",g:"die",lvl:"C1"},
   {de:"krallen",en:"claws",cat:"Common",lvl:"C1"},
   {de:"das Kreta",en:"Crete",cat:"Nouns",g:"das",lvl:"C1"},
+  /* curated course additions */
+  {de:"die Firma",en:"the company",cat:"Work",g:"die",lvl:"A2"},
+  {de:"die Tablette",en:"the pill / tablet",cat:"Health",g:"die",lvl:"A2"},
+  {de:"die Wohnung",en:"the apartment",cat:"Home",g:"die",lvl:"A2"},
+  {de:"abfahren",en:"to depart",cat:"Travel",lvl:"A2"},
+  {de:"kündigen",en:"to quit / give notice",cat:"Work",lvl:"B1"},
+  {de:"einstellen",en:"to hire",cat:"Work",lvl:"B1"},
+  {de:"die Nachrichten",en:"the news",cat:"Society",g:"die",lvl:"B1"},
 ];
 const PHRASES=[
   {de:"Wie geht es dir?",en:"How are you?",lvl:"A1"},{de:"Mir geht es gut, danke.",en:"I'm doing well, thank you.",lvl:"A1"},
@@ -11310,6 +11329,81 @@ const PHRASES=[
   {de:"Meiner Meinung nach ...",en:"In my opinion ...",lvl:"B1"},{de:"Es kommt darauf an.",en:"It depends.",lvl:"B1"},
   {de:"Ich bin damit einverstanden.",en:"I agree with that.",lvl:"B1"},{de:"Das ist mir egal.",en:"I don't care.",lvl:"B1"},
   {de:"Ich habe keine Ahnung.",en:"I have no idea.",lvl:"B1"},
+  /* curated course phrases */
+  {de:"Ich komme aus Italien.",en:"I come from Italy.",lvl:"A1"},
+  {de:"Ich wohne in Berlin.",en:"I live in Berlin.",lvl:"A1"},
+  {de:"Ich spreche ein bisschen Deutsch.",en:"I speak a little German.",lvl:"A1"},
+  {de:"Sprechen Sie Englisch?",en:"Do you speak English?",lvl:"A1"},
+  {de:"Wie bitte?",en:"Pardon? / Come again?",lvl:"A1"},
+  {de:"Ich möchte einen Kaffee.",en:"I would like a coffee.",lvl:"A1"},
+  {de:"Das schmeckt sehr gut.",en:"That tastes very good.",lvl:"A1"},
+  {de:"Ich habe Hunger.",en:"I am hungry.",lvl:"A1"},
+  {de:"Ich habe Durst.",en:"I am thirsty.",lvl:"A1"},
+  {de:"Wo wohnst du?",en:"Where do you live?",lvl:"A1"},
+  {de:"Das ist meine Familie.",en:"This is my family.",lvl:"A1"},
+  {de:"Ich habe zwei Brüder.",en:"I have two brothers.",lvl:"A1"},
+  {de:"Es ist zehn Uhr.",en:"It is ten o'clock.",lvl:"A1"},
+  {de:"Der Zug fährt um acht Uhr.",en:"The train leaves at eight o'clock.",lvl:"A1"},
+  {de:"Eine Fahrkarte nach München, bitte.",en:"A ticket to Munich, please.",lvl:"A1"},
+  {de:"Wo ist der Bahnhof?",en:"Where is the train station?",lvl:"A1"},
+  {de:"Gehen Sie geradeaus.",en:"Go straight ahead.",lvl:"A1"},
+  {de:"Die Rechnung, bitte.",en:"The bill, please.",lvl:"A1"},
+  {de:"Ich nehme das Schnitzel.",en:"I'll take the schnitzel.",lvl:"A1"},
+  {de:"Haben Sie einen Tisch für zwei?",en:"Do you have a table for two?",lvl:"A1"},
+  {de:"Das Wetter ist schön heute.",en:"The weather is nice today.",lvl:"A1"},
+  {de:"Es regnet.",en:"It is raining.",lvl:"A1"},
+  {de:"Mir ist kalt.",en:"I am cold.",lvl:"A1"},
+  {de:"Bis morgen!",en:"See you tomorrow!",lvl:"A1"},
+  {de:"Ich bin gestern spät nach Hause gekommen.",en:"I came home late yesterday.",lvl:"A2"},
+  {de:"Hast du am Wochenende Zeit?",en:"Do you have time on the weekend?",lvl:"A2"},
+  {de:"Wir treffen uns um sieben.",en:"We're meeting at seven.",lvl:"A2"},
+  {de:"Ich muss heute lange arbeiten.",en:"I have to work late today.",lvl:"A2"},
+  {de:"Kannst du das bitte wiederholen?",en:"Can you repeat that, please?",lvl:"A2"},
+  {de:"Ich habe die Hausaufgaben gemacht.",en:"I did the homework.",lvl:"A2"},
+  {de:"Der Bus hat Verspätung.",en:"The bus is delayed.",lvl:"A2"},
+  {de:"Ich bin mit dem Fahrrad gefahren.",en:"I went by bike.",lvl:"A2"},
+  {de:"Welche Größe haben Sie?",en:"What size are you?",lvl:"A2"},
+  {de:"Kann ich das anprobieren?",en:"Can I try that on?",lvl:"A2"},
+  {de:"Das ist mir zu teuer.",en:"That is too expensive for me.",lvl:"A2"},
+  {de:"Gibt es das auch in Blau?",en:"Do you have this in blue too?",lvl:"A2"},
+  {de:"Ich habe Kopfschmerzen.",en:"I have a headache.",lvl:"A2"},
+  {de:"Ich fühle mich nicht gut.",en:"I don't feel well.",lvl:"A2"},
+  {de:"Gute Besserung!",en:"Get well soon!",lvl:"A2"},
+  {de:"Ich muss zum Arzt gehen.",en:"I have to go to the doctor.",lvl:"A2"},
+  {de:"Was hast du gestern gemacht?",en:"What did you do yesterday?",lvl:"A2"},
+  {de:"Ich habe meine Freunde getroffen.",en:"I met my friends.",lvl:"A2"},
+  {de:"Wir sind ins Kino gegangen.",en:"We went to the movies.",lvl:"A2"},
+  {de:"Der Film war wirklich spannend.",en:"The movie was really exciting.",lvl:"A2"},
+  {de:"Ich stehe jeden Tag um sechs auf.",en:"I get up at six every day.",lvl:"A2"},
+  {de:"Zuerst frühstücke ich, dann dusche ich.",en:"First I have breakfast, then I shower.",lvl:"A2"},
+  {de:"Ich freue mich auf den Sommer.",en:"I'm looking forward to the summer.",lvl:"A2"},
+  {de:"Es tut mir leid, ich habe keine Zeit.",en:"I'm sorry, I don't have time.",lvl:"A2"},
+  {de:"Darf ich hier parken?",en:"May I park here?",lvl:"A2"},
+  {de:"Ich schlage vor, dass wir früher anfangen.",en:"I suggest that we start earlier.",lvl:"B1"},
+  {de:"Einerseits stimmt das, andererseits nicht.",en:"On the one hand that's true, on the other hand not.",lvl:"B1"},
+  {de:"Ich bin ganz deiner Meinung.",en:"I completely agree with you.",lvl:"B1"},
+  {de:"Da bin ich anderer Meinung.",en:"I disagree there.",lvl:"B1"},
+  {de:"Könntest du mir einen Gefallen tun?",en:"Could you do me a favor?",lvl:"B1"},
+  {de:"Wenn ich Zeit hätte, würde ich mehr lesen.",en:"If I had time, I would read more.",lvl:"B1"},
+  {de:"An deiner Stelle würde ich das machen.",en:"In your place I would do that.",lvl:"B1"},
+  {de:"Es lohnt sich auf jeden Fall.",en:"It's definitely worth it.",lvl:"B1"},
+  {de:"Ich habe vor, im Sommer nach Deutschland zu fahren.",en:"I plan to go to Germany in the summer.",lvl:"B1"},
+  {de:"Je mehr ich lerne, desto besser spreche ich.",en:"The more I learn, the better I speak.",lvl:"B1"},
+  {de:"Obwohl es regnete, sind wir gewandert.",en:"Although it rained, we went hiking.",lvl:"B1"},
+  {de:"Ich interessiere mich für Geschichte.",en:"I am interested in history.",lvl:"B1"},
+  {de:"Es hängt vom Wetter ab.",en:"It depends on the weather.",lvl:"B1"},
+  {de:"Ich habe mich um die Stelle beworben.",en:"I applied for the job.",lvl:"B1"},
+  {de:"Könnten Sie mir das genauer erklären?",en:"Could you explain that in more detail?",lvl:"B1"},
+  {de:"Soweit ich weiß, ist das richtig.",en:"As far as I know, that's correct.",lvl:"B1"},
+  {de:"Ich bin gespannt, wie es weitergeht.",en:"I'm curious how it continues.",lvl:"B1"},
+  {de:"Das kommt überhaupt nicht in Frage.",en:"That's completely out of the question.",lvl:"B1"},
+  {de:"Ich habe es mir anders überlegt.",en:"I changed my mind.",lvl:"B1"},
+  {de:"Mach dir keine Sorgen!",en:"Don't worry!",lvl:"B1"},
+  {de:"Wir müssen einen Kompromiss finden.",en:"We have to find a compromise.",lvl:"B1"},
+  {de:"Der Termin wurde auf Montag verschoben.",en:"The appointment was moved to Monday.",lvl:"B1"},
+  {de:"Ich bin der Meinung, dass Sport wichtig ist.",en:"I think that sports are important.",lvl:"B1"},
+  {de:"Es wäre schön, wenn du kommen könntest.",en:"It would be nice if you could come.",lvl:"B1"},
+  {de:"Immer mehr Leute arbeiten von zu Hause.",en:"More and more people work from home.",lvl:"B1"},
   {de:"Das liegt auf der Hand.",en:"That's obvious.",lvl:"B2"},{de:"Ich drücke dir die Daumen.",en:"I'll keep my fingers crossed for you.",lvl:"B2"},
   {de:"Das ist nicht mein Bier.",en:"That's not my problem.",lvl:"B2"},{de:"Es hat sich gelohnt.",en:"It was worth it.",lvl:"B2"},
   {de:"Im Großen und Ganzen ...",en:"By and large ...",lvl:"B2"},
@@ -11349,6 +11443,74 @@ const GRAMMAR=[
   {lvl:"C1",topic:"Participles as adjectives",q:"Partizip I: \"das ___ Kind\" (schlafen)",a:"schlafende",type:"type",hint:"Partizip I + ending (neuter nom.)",ex:"schlafen → das schlafende Kind."},
   {lvl:"C1",topic:"Connectors (formal)",q:"Choose the formal 'consequently'",a:"folglich",opts:["folglich","weil","aber"],ex:"folglich = consequently."},
   {lvl:"C1",topic:"Konjunktiv II (past)",q:"Irreal past: \"Wenn ich Zeit gehabt hätte, ___ ich gekommen.\"",a:"wäre",opts:["wäre","hätte","würde"],ex:"kommen uses sein → wäre gekommen."},
+  /* ---- curated course grammar ---- */
+  {lvl:"A1",topic:"sein / haben",q:"\"you are\" (du): du ___",a:"bist",opts:["bist","bin","seid"],ex:"sein → du bist"},
+  {lvl:"A1",topic:"sein / haben",q:"\"we are\": wir ___",a:"sind",opts:["sind","seid","bin"],ex:"sein → wir sind"},
+  {lvl:"A1",topic:"sein / haben",q:"\"he has\": er ___",a:"hat",opts:["hat","habt","habe"],ex:"haben → er hat"},
+  {lvl:"A1",topic:"sein / haben",q:"\"you (pl.) have\": ihr ___",a:"habt",opts:["habt","haben","hat"],ex:"haben → ihr habt"},
+  {lvl:"A1",topic:"Personal pronouns",q:"\"we\" in German is ___",a:"wir",opts:["wir","ihr","sie"],ex:"wir = we"},
+  {lvl:"A1",topic:"Personal pronouns",q:"\"you\" (formal) is ___",a:"Sie",opts:["Sie","du","ihr"],ex:"Sie (capitalized) = formal you"},
+  {lvl:"A1",topic:"Possessives",q:"\"___ Name ist Anna.\" (my)",a:"Mein",opts:["Mein","Meine","Meinen"],ex:"der Name → mein Name"},
+  {lvl:"A1",topic:"Possessives",q:"\"Ist das ___ Buch?\" (your, informal)",a:"dein",opts:["dein","deine","deinen"],ex:"das Buch → dein Buch"},
+  {lvl:"A1",topic:"Accusative",q:"\"Ich sehe ___ Hund.\"",a:"den",opts:["den","der","dem"],ex:"Masculine accusative: der → den"},
+  {lvl:"A1",topic:"Accusative",q:"\"Ich habe ___ Idee.\"",a:"eine",opts:["eine","einen","ein"],ex:"die Idee (fem.) → eine Idee"},
+  {lvl:"A1",topic:"Plurals",q:"der Apfel → die ___",a:"Äpfel",opts:["Äpfel","Apfels","Apfeln"],ex:"Apfel → Äpfel (umlaut plural)"},
+  {lvl:"A1",topic:"Plurals",q:"das Kind → die ___",a:"Kinder",opts:["Kinder","Kinds","Kinden"],ex:"Kind → Kinder"},
+  {lvl:"A1",topic:"Question words",q:"\"___ kommst du?\" — \"Aus Italien.\"",a:"Woher",opts:["Woher","Wohin","Wann"],ex:"woher = where from"},
+  {lvl:"A1",topic:"Question words",q:"\"___ ist das?\" — \"Das ist Maria.\"",a:"Wer",opts:["Wer","Was","Wie"],ex:"wer = who"},
+  {lvl:"A1",topic:"Question words",q:"\"___ alt bist du?\"",a:"Wie",opts:["Wie","Was","Wo"],ex:"wie alt = how old"},
+  {lvl:"A1",topic:"Word order (V2)",q:"Choose the correct sentence:",a:"Heute gehe ich ins Kino.",opts:["Heute gehe ich ins Kino.","Heute ich gehe ins Kino.","Heute ich ins Kino gehe."],ex:"The verb is always in 2nd position."},
+  {lvl:"A1",topic:"Word order (V2)",q:"Choose the correct question:",a:"Sprichst du Deutsch?",opts:["Sprichst du Deutsch?","Du sprichst Deutsch?","Deutsch du sprichst?"],ex:"Yes/no question: verb first."},
+  {lvl:"A1",topic:"Time & numbers",q:"\"halb drei\" means ___",a:"2:30",opts:["2:30","3:30","2:45"],ex:"halb drei = half TO three = 2:30"},
+  {lvl:"A1",topic:"Time & numbers",q:"\"einundzwanzig\" = ___",a:"21",opts:["21","12","31"],ex:"ein-und-zwanzig = one-and-twenty = 21"},
+  {lvl:"A1",topic:"Negation",q:"\"Ich spreche ___ Italienisch.\" (no/not any)",a:"kein",opts:["kein","nicht","nein"],ex:"kein before nouns."},
+  {lvl:"A2",topic:"Perfekt tense",q:"kaufen → \"Ich habe das Brot ___.\"",a:"gekauft",opts:["gekauft","gekaufen","kauft"],ex:"kaufen → ge-kauf-t"},
+  {lvl:"A2",topic:"Perfekt tense",q:"sehen → \"Ich habe den Film ___.\"",a:"gesehen",opts:["gesehen","geseht","sah"],ex:"sehen → gesehen (strong verb)"},
+  {lvl:"A2",topic:"Perfekt tense",q:"\"Wir ___ zu Hause geblieben.\"",a:"sind",opts:["sind","haben","waren"],ex:"bleiben uses sein → wir sind geblieben"},
+  {lvl:"A2",topic:"Modal verbs",q:"\"___ du mir helfen?\" (can)",a:"Kannst",opts:["Kannst","Kann","Könnt"],ex:"können → du kannst"},
+  {lvl:"A2",topic:"Modal verbs",q:"\"Ich ___ morgen arbeiten.\" (must)",a:"muss",opts:["muss","musst","müssen"],ex:"müssen → ich muss"},
+  {lvl:"A2",topic:"Modal verbs",q:"\"Ich ___ einen Kaffee, bitte.\" (would like)",a:"möchte",opts:["möchte","möchten","mag"],ex:"möchten → ich möchte"},
+  {lvl:"A2",topic:"Modal verbs",q:"Word order with modals:",a:"Ich kann heute nicht kommen.",opts:["Ich kann heute nicht kommen.","Ich kann nicht kommen heute.","Ich heute kann nicht kommen."],ex:"Modal in position 2, infinitive at the end."},
+  {lvl:"A2",topic:"Dative",q:"\"Kannst du ___ helfen?\" (me)",a:"mir",opts:["mir","mich","ich"],ex:"helfen takes dative → mir"},
+  {lvl:"A2",topic:"Dative",q:"\"Das Buch gehört ___ Frau.\"",a:"der",opts:["der","die","dem"],ex:"gehören + dative; die Frau → der Frau"},
+  {lvl:"A2",topic:"Accusative pronouns",q:"\"Ich sehe ___ morgen.\" (you, informal)",a:"dich",opts:["dich","dir","du"],ex:"sehen + accusative → dich"},
+  {lvl:"A2",topic:"Separable verbs",q:"aufstehen: \"Ich stehe um 7 Uhr ___.\"",a:"auf",opts:["auf","aus","an"],ex:"auf|stehen — prefix goes to the end."},
+  {lvl:"A2",topic:"Separable verbs",q:"einkaufen: \"Wir kaufen morgen ___.\"",a:"ein",opts:["ein","auf","aus"],ex:"ein|kaufen — Wir kaufen ein."},
+  {lvl:"A2",topic:"Comparatives",q:"gut → ___ (better)",a:"besser",opts:["besser","guter","mehr gut"],ex:"gut → besser → am besten (irregular)"},
+  {lvl:"A2",topic:"Comparatives",q:"\"Das ist das ___ Restaurant der Stadt.\" (best)",a:"beste",opts:["beste","besser","gute"],ex:"Superlative before noun: das beste Restaurant"},
+  {lvl:"A2",topic:"Conjunctions",q:"\"Ich glaube, ___ er Recht hat.\"",a:"dass",opts:["dass","weil","denn"],ex:"glauben, dass … (verb to the end)"},
+  {lvl:"A2",topic:"Conjunctions",q:"\"___ es regnet, bleiben wir zu Hause.\"",a:"Wenn",opts:["Wenn","Dass","Ob"],ex:"wenn = if/when"},
+  {lvl:"A2",topic:"Imperative",q:"\"___ Sie bitte hier!\" (warten)",a:"Warten",opts:["Warten","Wartet","Warte"],ex:"Formal imperative: Warten Sie!"},
+  {lvl:"A2",topic:"Imperative",q:"\"___ bitte langsamer!\" (sprechen, du)",a:"Sprich",opts:["Sprich","Sprichst","Sprechen"],ex:"du sprichst → Sprich! (drop -st)"},
+  {lvl:"A2",topic:"Time prepositions",q:"\"___ Montag habe ich frei.\"",a:"Am",opts:["Am","Im","Um"],ex:"am + day, im + month, um + clock time"},
+  {lvl:"A2",topic:"Time prepositions",q:"\"Ich lerne ___ zwei Jahren Deutsch.\"",a:"seit",opts:["seit","vor","für"],ex:"seit + dative = since/for (ongoing)"},
+  {lvl:"B1",topic:"Word order (subordinate)",q:"\"Ich weiß, dass du morgen ___.\"",a:"arbeiten musst",opts:["arbeiten musst","musst arbeiten","arbeitest musst"],ex:"dass-clause: conjugated verb last."},
+  {lvl:"B1",topic:"Word order (subordinate)",q:"\"..., weil ich das Buch schon ___.\"",a:"gelesen habe",opts:["gelesen habe","habe gelesen","lese gehabt"],ex:"weil + Perfekt: participle then habe, at the end."},
+  {lvl:"B1",topic:"Word order (subordinate)",q:"\"___ es regnet, gehen wir spazieren.\" (although)",a:"Obwohl",opts:["Obwohl","Weil","Deshalb"],ex:"obwohl = although (verb to the end)"},
+  {lvl:"B1",topic:"Relative clauses",q:"\"Die Frau, ___ dort wohnt, ist Ärztin.\"",a:"die",opts:["die","der","das"],ex:"die Frau → relative pronoun die (nom. fem.)"},
+  {lvl:"B1",topic:"Relative clauses",q:"\"Der Freund, ___ ich helfe, wohnt hier.\"",a:"dem",opts:["dem","den","der"],ex:"helfen + dative → dem"},
+  {lvl:"B1",topic:"Two-way prepositions",q:"Motion: \"Ich stelle die Tasche ___ Tisch.\"",a:"auf den",opts:["auf den","auf dem","auf der"],ex:"Motion (where to?) → accusative: auf den Tisch"},
+  {lvl:"B1",topic:"Two-way prepositions",q:"\"Ich hänge das Bild ___ die Wand.\"",a:"an",opts:["an","auf","über"],ex:"an die Wand = onto the wall"},
+  {lvl:"B1",topic:"Konjunktiv II",q:"\"An deiner Stelle ___ ich mehr schlafen.\"",a:"würde",opts:["würde","werde","will"],ex:"Advice: würde + infinitive"},
+  {lvl:"B1",topic:"Konjunktiv II",q:"\"Wenn ich reich ___, würde ich reisen.\"",a:"wäre",opts:["wäre","bin","war"],ex:"sein → wäre (Konjunktiv II)"},
+  {lvl:"B1",topic:"Konjunktiv II",q:"Polite: \"___ Sie mir bitte helfen?\"",a:"Könnten",opts:["Könnten","Können","Konnten"],ex:"Extra polite: Könnten Sie …?"},
+  {lvl:"B1",topic:"Passive",q:"\"Das Brot ___ jeden Tag frisch gebacken.\"",a:"wird",opts:["wird","ist","hat"],ex:"Present passive: werden + participle"},
+  {lvl:"B1",topic:"Passive",q:"\"In Deutschland ___ viel Brot gegessen.\"",a:"wird",opts:["wird","werden","ist"],ex:"wird gegessen = is (being) eaten"},
+  {lvl:"B1",topic:"Future",q:"\"Ich ___ dich morgen anrufen.\"",a:"werde",opts:["werde","würde","will"],ex:"Future: werden + infinitive"},
+  {lvl:"B1",topic:"Genitive",q:"\"Das ist das Auto ___ Vaters.\"",a:"meines",opts:["meines","meinem","meinen"],ex:"Genitive masc.: meines Vaters"},
+  {lvl:"B1",topic:"Genitive",q:"\"Wegen ___ Wetters bleiben wir hier.\"",a:"des",opts:["des","dem","das"],ex:"wegen + genitive: des Wetters"},
+  {lvl:"B1",topic:"Adjective endings",q:"\"Ich hätte gern den ___ Kuchen.\" (klein)",a:"kleinen",opts:["kleinen","kleine","kleiner"],ex:"den + acc. masc. → -en: den kleinen Kuchen"},
+  {lvl:"B1",topic:"Adjective endings",q:"\"Das ist ein ___ Film.\" (gut)",a:"guter",opts:["guter","gutes","guten"],ex:"ein + nom. masc. → -er: ein guter Film"},
+  {lvl:"B1",topic:"Reflexive verbs",q:"\"Ich wasche ___ die Hände.\"",a:"mir",opts:["mir","mich","sich"],ex:"With a body part: dative → mir"},
+  {lvl:"B1",topic:"Reflexive verbs",q:"\"Erinnerst du ___ an mich?\"",a:"dich",opts:["dich","dir","sich"],ex:"sich erinnern an + acc. → dich"},
+  {lvl:"B1",topic:"als / wenn",q:"\"___ ich ein Kind war, wohnte ich in Rom.\"",a:"Als",opts:["Als","Wenn","Wann"],ex:"als = single event in the past"},
+  {lvl:"B1",topic:"Präteritum",q:"\"Gestern ___ ich krank.\"",a:"war",opts:["war","bin","wäre"],ex:"sein → ich war (Präteritum)"},
+  {lvl:"B1",topic:"Präteritum",q:"\"Ich ___ gestern nicht kommen.\" (couldn't)",a:"konnte",opts:["konnte","könnte","kann"],ex:"können → ich konnte (no umlaut!)"},
+  {lvl:"B1",topic:"um … zu",q:"\"Ich lerne Deutsch, ___ in Berlin zu arbeiten.\"",a:"um",opts:["um","für","damit"],ex:"um … zu + infinitive = in order to"},
+  {lvl:"B1",topic:"Indirect questions",q:"\"Weißt du, wann der Zug ___?\"",a:"kommt",opts:["kommt","kommt er","er kommt"],ex:"Indirect question: verb at the end."},
+  {lvl:"B1",topic:"Verbs + prepositions",q:"\"Ich warte ___ den Bus.\"",a:"auf",opts:["auf","für","an"],ex:"warten auf + accusative"},
+  {lvl:"B1",topic:"Verbs + prepositions",q:"\"Sie interessiert sich ___ Musik.\"",a:"für",opts:["für","an","über"],ex:"sich interessieren für + accusative"},
+  {lvl:"B1",topic:"lassen",q:"\"Ich ___ mein Auto reparieren.\"",a:"lasse",opts:["lasse","werde","mache"],ex:"lassen = to have something done"},
 ];
 const PRONOUNS=["ich","du","er/sie/es","wir","ihr","sie/Sie"];
 const AUX={haben:["habe","hast","hat","haben","habt","haben"],sein:["bin","bist","ist","sind","seid","sind"]};
@@ -11373,6 +11535,25 @@ const VERBS=[
   {inf:"bringen",en:"to bring",lvl:"B2",pres:["bringe","bringst","bringt","bringen","bringt","bringen"],part:"gebracht",aux:"haben",prat:"brachte",k2:"brächte"},
   {inf:"denken",en:"to think",lvl:"B2",pres:["denke","denkst","denkt","denken","denkt","denken"],part:"gedacht",aux:"haben",prat:"dachte",k2:"dächte"},
   {inf:"verstehen",en:"to understand",lvl:"B2",pres:["verstehe","verstehst","versteht","verstehen","versteht","verstehen"],part:"verstanden",aux:"haben",prat:"verstand",k2:"verstünde"},
+  {inf:"wohnen",en:"to live (reside)",lvl:"A1",pres:["wohne","wohnst","wohnt","wohnen","wohnt","wohnen"],part:"gewohnt",aux:"haben",prat:"wohnte",k2:"würde wohnen"},
+  {inf:"arbeiten",en:"to work",lvl:"A1",pres:["arbeite","arbeitest","arbeitet","arbeiten","arbeitet","arbeiten"],part:"gearbeitet",aux:"haben",prat:"arbeitete",k2:"würde arbeiten"},
+  {inf:"kaufen",en:"to buy",lvl:"A1",pres:["kaufe","kaufst","kauft","kaufen","kauft","kaufen"],part:"gekauft",aux:"haben",prat:"kaufte",k2:"würde kaufen"},
+  {inf:"warten",en:"to wait",lvl:"A1",pres:["warte","wartest","wartet","warten","wartet","warten"],part:"gewartet",aux:"haben",prat:"wartete",k2:"würde warten"},
+  {inf:"brauchen",en:"to need",lvl:"A1",pres:["brauche","brauchst","braucht","brauchen","braucht","brauchen"],part:"gebraucht",aux:"haben",prat:"brauchte",k2:"bräuchte"},
+  {inf:"können",en:"can / to be able",lvl:"A1",pres:["kann","kannst","kann","können","könnt","können"],part:"gekonnt",aux:"haben",prat:"konnte",k2:"könnte"},
+  {inf:"müssen",en:"must / to have to",lvl:"A1",pres:["muss","musst","muss","müssen","müsst","müssen"],part:"gemusst",aux:"haben",prat:"musste",k2:"müsste"},
+  {inf:"wollen",en:"to want",lvl:"A2",pres:["will","willst","will","wollen","wollt","wollen"],part:"gewollt",aux:"haben",prat:"wollte",k2:"wollte"},
+  {inf:"dürfen",en:"may / to be allowed",lvl:"A2",pres:["darf","darfst","darf","dürfen","dürft","dürfen"],part:"gedurft",aux:"haben",prat:"durfte",k2:"dürfte"},
+  {inf:"lesen",en:"to read",lvl:"A2",pres:["lese","liest","liest","lesen","lest","lesen"],part:"gelesen",aux:"haben",prat:"las",k2:"läse"},
+  {inf:"schreiben",en:"to write",lvl:"A2",pres:["schreibe","schreibst","schreibt","schreiben","schreibt","schreiben"],part:"geschrieben",aux:"haben",prat:"schrieb",k2:"würde schreiben"},
+  {inf:"schlafen",en:"to sleep",lvl:"A2",pres:["schlafe","schläfst","schläft","schlafen","schlaft","schlafen"],part:"geschlafen",aux:"haben",prat:"schlief",k2:"würde schlafen"},
+  {inf:"helfen",en:"to help",lvl:"A2",pres:["helfe","hilfst","hilft","helfen","helft","helfen"],part:"geholfen",aux:"haben",prat:"half",k2:"würde helfen"},
+  {inf:"bleiben",en:"to stay",lvl:"A2",pres:["bleibe","bleibst","bleibt","bleiben","bleibt","bleiben"],part:"geblieben",aux:"sein",prat:"blieb",k2:"bliebe"},
+  {inf:"laufen",en:"to run / walk",lvl:"A2",pres:["laufe","läufst","läuft","laufen","lauft","laufen"],part:"gelaufen",aux:"sein",prat:"lief",k2:"liefe"},
+  {inf:"glauben",en:"to believe",lvl:"A2",pres:["glaube","glaubst","glaubt","glauben","glaubt","glauben"],part:"geglaubt",aux:"haben",prat:"glaubte",k2:"würde glauben"},
+  {inf:"wissen",en:"to know (a fact)",lvl:"B1",pres:["weiß","weißt","weiß","wissen","wisst","wissen"],part:"gewusst",aux:"haben",prat:"wusste",k2:"wüsste"},
+  {inf:"treffen",en:"to meet",lvl:"B1",pres:["treffe","triffst","trifft","treffen","trefft","treffen"],part:"getroffen",aux:"haben",prat:"traf",k2:"würde treffen"},
+  {inf:"stehen",en:"to stand",lvl:"B1",pres:["stehe","stehst","steht","stehen","steht","stehen"],part:"gestanden",aux:"haben",prat:"stand",k2:"stünde"},
 ];
 const TENSE_LVL={present:"A1",perfekt:"A2",praet:"B2",k2:"C1"};
 const TENSE_NAME={present:"Present",perfekt:"Perfekt",praet:"Präteritum",k2:"Konjunktiv II"};
@@ -11391,12 +11572,27 @@ const KEY="sprachheld_v3";
 const todayStr=()=>new Date().toISOString().slice(0,10);
 const DAY=86400000;
 const DEFAULT={name:"Bruno",cefr:"A1",xp:0,streak:0,lastDay:null,daysActive:[],goal:400,todayXP:0,todayDate:todayStr(),
-  skill:{vocab:{c:0,w:0},grammar:{c:0,w:0},verbs:{c:0,w:0},phrases:{c:0,w:0}},history:[],mem:{},patterns:{},conf:{},muted:false,bestCombo:0,lessons:{},voiceURI:""};
+  skill:{vocab:{c:0,w:0},grammar:{c:0,w:0},verbs:{c:0,w:0},phrases:{c:0,w:0}},history:[],mem:{},patterns:{},conf:{},muted:false,bestCombo:0,lessons:{},voiceURI:"",tipsSeen:{},stories:{},
+  quests:null,ach:{},freezes:0,freezeProg:0,placed:false,spokeOnce:false,exam:{best:0,attempts:0}};
 let S=load();if(S.goal<200)S.goal=400;
 function load(){for(const k of [KEY,"sprachheld_v2","sprachheld_v1"]){try{const r=JSON.parse(localStorage.getItem(k));if(r)return Object.assign(JSON.parse(JSON.stringify(DEFAULT)),r);}catch(e){}}return JSON.parse(JSON.stringify(DEFAULT));}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function rollDay(){const t=todayStr();if(S.todayDate!==t){if(S.todayXP>0){S.history.push({date:S.todayDate,xp:S.todayXP});if(S.history.length>30)S.history.shift();}S.todayDate=t;S.todayXP=0;}}
-function markActive(){const t=todayStr();if(S.lastDay===t)return;const y=new Date(Date.now()-DAY).toISOString().slice(0,10);S.streak=(S.lastDay===y)?S.streak+1:1;S.lastDay=t;if(!S.daysActive.includes(t))S.daysActive.push(t);}
+/* streak with freezes: a missed day is covered by a freeze if you have one */
+function markActive(){
+  const t=todayStr();if(S.lastDay===t)return;
+  if(S.lastDay){
+    const gap=Math.round((new Date(t)-new Date(S.lastDay))/DAY);
+    if(gap===1)S.streak++;
+    else if(gap>1){
+      const missed=gap-1;
+      if((S.freezes||0)>=missed){S.freezes-=missed;S.streak++;setTimeout(()=>toast("🧊 Streak freeze used — streak saved!"),500);}
+      else S.streak=1;
+    }
+  }else S.streak=1;
+  S.lastDay=t;if(!S.daysActive.includes(t))S.daysActive.push(t);
+}
+function earnFreeze(){S.freezeProg=(S.freezeProg||0)+1;if(S.freezeProg>=10){S.freezeProg=0;if((S.freezes||0)<3){S.freezes=(S.freezes||0)+1;setTimeout(()=>toast("🧊 Streak freeze earned! ("+S.freezes+"/3)"),1200);}}}
 function level(){return Math.floor(S.xp/100)+1;}
 function levelProg(){return S.xp%100;}
 function acc(skill){const s=S.skill[skill];const t=s.c+s.w;return t?Math.round(100*s.c/t):null;}
@@ -11427,8 +11623,12 @@ function grade(q,correct,chosen,bonus){
   if(!S.patterns[q.bucket])S.patterns[q.bucket]={c:0,w:0};
   S.patterns[q.bucket][correct?"c":"w"]++;
   if(!correct && chosen){const key=q.bucket+" ◦ chose “"+chosen+"” for “"+q.a+"”";S.conf[key]=(S.conf[key]||0)+1;}
-  if(correct){S.xp+=8+(bonus||0);S.todayXP+=8+(bonus||0);markActive();}
-  save();
+  const inExam=sess&&sess.mode==="exam"; // exam XP is awarded once, at the end
+  if(correct){if(!inExam){S.xp+=8+(bonus||0);S.todayXP+=8+(bonus||0);}markActive();}
+  if(sess&&(sess.mode==="placement"||inExam)){save();return;}
+  if(correct){questBump("correct",1);if(sess&&sess.mode==="review")questBump("review",1);}
+  questBump("xp",S.todayXP,"set");
+  save();checkAch();
 }
 
 /* eligible registry / pools. scope 'current' = exactly the chosen level; otherwise cumulative (<= level) */
@@ -11449,6 +11649,27 @@ function deVoices(){const v=(window.speechSynthesis?speechSynthesis.getVoices():
 if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
 function speak(text){if(!("speechSynthesis" in window))return toast("Speech not supported here");speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="de-DE";u.rate=0.9;if(deVoice)u.voice=deVoice;speechSynthesis.speak(u);}
 window.speak=speak;
+
+/* ---- speech recognition (speaking exercises) ---- */
+const SRCls=window.SpeechRecognition||window.webkitSpeechRecognition;const SR_OK=!!SRCls;
+function normSp(s){return String(s||"").toLowerCase().replace(/[.,!?;:"'’„“\-–…]/g,"").replace(/\s+/g," ").trim();}
+function spMatch(target,heard){const t=normSp(target),h=normSp(heard);if(!h)return false;if(t===h)return true;const tw=t.split(" ");const hw=new Set(h.split(" "));let hit=0;tw.forEach(w=>{if(hw.has(w))hit++;});return hit/tw.length>=0.7;}
+let rec=null;
+window.startRec=()=>{const q=sess&&sess.cur;if(!q||sess.locked||!SR_OK)return;
+  try{rec&&rec.abort();}catch(e){}
+  try{speechSynthesis.cancel();}catch(e){}
+  rec=new SRCls();rec.lang="de-DE";rec.interimResults=false;rec.maxAlternatives=5;
+  const st=$("#srstatus"),mic=$("#micbtn");if(st)st.textContent="🎙️ Listening… say it now";if(mic)mic.classList.add("listening");
+  rec.onresult=e=>{let best="",ok=false;const alts=e.results[0];for(let i=0;i<alts.length;i++){const tr=alts[i].transcript;if(!best)best=tr;if(spMatch(q.a,tr)){ok=true;best=tr;break;}}
+    if(sess&&sess.cur===q&&!sess.locked){sess.locked=true;
+      if(ok)fbCorrect();else fbWrong(q.a,"Heard: “"+(best||"…")+"”");
+      const mb=$("#micbtn");if(mb)mb.style.pointerEvents="none";const sk=$("#srskip");if(sk)sk.style.display="none";
+      frListen(q.a);onGraded(q,ok,best);}};
+  rec.onerror=e=>{const st2=$("#srstatus");if(!st2)return;st2.textContent=e.error==="not-allowed"?"🎤 Mic blocked — allow microphone access, or skip":"Didn't catch that — tap the mic to try again";const mb=$("#micbtn");if(mb)mb.classList.remove("listening");};
+  rec.onend=()=>{const mb=$("#micbtn");if(mb)mb.classList.remove("listening");const st2=$("#srstatus");if(st2&&sess&&!sess.locked&&/Listening/.test(st2.textContent))st2.textContent="Tap the mic to try again";};
+  try{rec.start();}catch(e){}};
+window.skipSpeak=()=>{if(!sess||sess.locked)return;try{rec&&rec.abort();}catch(e){}sess.queue.shift();if(!sess.queue.length&&!sess.answered){sess=null;view="practice";render();return;}runSession();};
+window.umlIns=c=>{const i=$("#tin");if(!i||i.disabled)return;i.value+=c;i.focus();};
 
 /* ---- game juice: sound, haptics, combo, confetti ---- */
 let actx=null;
@@ -11473,6 +11694,10 @@ function makeQForItem(id){
   if(id[0]==="p"&&id[1]===":"){
     const p=PHRASES.find(x=>x.de===id.slice(2));if(!p)return null;
     const words=p.de.split(" ");
+    // speaking task: forced in Speaking mode, or occasionally once you know the phrase
+    if(SR_OK&&((sess&&sess.forceSpeak)||(strong&&Math.random()<0.3))){
+      return Object.assign(base,{type:"speak",promptSmall:"Say it in German",prompt:p.de,sub:p.en,speak:p.de,a:p.de});
+    }
     // tap-to-build word order task (interactive) once it has enough words and you've seen it once
     if(words.length>=3 && (strong||Math.random()<0.5)){
       return Object.assign(base,{type:"build",promptSmall:"Build the German sentence",prompt:p.en,words:shuffle(words),answer:p.de,speak:p.de,ex:p.de});
@@ -11559,7 +11784,7 @@ function viewToday(){
   const fixes=weakItems().slice(0,4);
   const hour=new Date().getHours();const greet=hour<12?"Guten Morgen":hour<18?"Guten Tag":"Guten Abend";
   return `<div class="fade">
-    <div class="top"><div><div class="hi">${greet}, ${S.name} 👋</div><div class="title">Sprachheld</div></div><div class="glass streak"><span class="fire">🔥</span>${S.streak}</div></div>
+    <div class="top"><div><div class="hi">${greet}, ${S.name} 👋</div><div class="title">Sprachheld</div></div><div class="glass streak"><span class="fire">🔥</span>${S.streak}${S.freezes?`<span style="margin-left:6px;font-size:12px;opacity:.85;">🧊${S.freezes}</span>`:""}</div></div>
     ${levelBar()}
     ${(()=>{const rk=rankFor(level());return `<div class="glass card hero-card pop">
       <div class="mascot" id="mascot" onclick="mascotTap()">${pixelMascot(7,rk.color)}</div>
@@ -11572,6 +11797,10 @@ function viewToday(){
     <div class="glass card pop"><div class="ringwrap"><div class="ring">${ringSVG(goalPct)}<div class="pct"><b>${Math.min(goalPct,100)}%</b><span>Daily goal</span></div></div>
       <div class="goalinfo"><h3>${S.todayXP} / ${S.goal} XP today</h3><p>${goalPct>=100?"Goal smashed! 🎉":`Adaptive practice at <b style="color:var(--txt)">${S.cefr}</b> — it targets your weak spots.`}</p></div></div></div>
     <div class="stats"><div class="glass stat"><b>${S.xp}</b><span>TOTAL XP</span></div><div class="glass stat"><b>Lv ${level()}</b><span>LEVEL</span></div><div class="glass stat"><b>${S.cefr}</b><span>CEFR</span></div></div>
+    ${!S.placed?`<div class="glass card"><div class="sec-label" style="margin:0 0 8px;">New here?</div>
+      <p style="color:var(--txt-dim);font-size:13px;margin:0 0 14px;line-height:1.5;">Take a quick 16-question placement test and we'll start you at the right level — everything below it gets unlocked automatically.</p>
+      <button class="btn" onclick="startPlacement()">🧭 Take placement test →</button></div>`:""}
+    ${questCard()}
     <div class="glass card">
       <div class="sec-label" style="margin:0 0 8px;">Smart review · adapts to your mistakes</div>
       ${rc>0?`<p style="color:var(--txt-dim);font-size:13px;margin:0 0 14px;line-height:1.5;"><b style="color:var(--txt)">${rc}</b> item${rc>1?'s':''} need work — missed cards and ones the schedule says are due. They come back spaced over time, not on a loop.</p>
@@ -11602,10 +11831,21 @@ window.toggleCat=(el,cat)=>{const box=el.nextElementSibling;if(box.style.display
 
 function viewPractice(){
   const rc=reviewCount();
-  return `<div class="fade"><div class="top"><div><div class="hi">Train your German</div><div class="title">Practice</div></div><div class="glass streak"><span class="fire">🔥</span>${S.streak}</div></div>${levelBar()}
+  return `<div class="fade"><div class="top"><div><div class="hi">Train your German</div><div class="title">Practice</div></div><div class="glass streak"><span class="fire">🔥</span>${S.streak}${S.freezes?`<span style="margin-left:6px;font-size:12px;opacity:.85;">🧊${S.freezes}</span>`:""}</div></div>${levelBar()}
     <div class="glass card pop"><div class="ringwrap"><div style="font-size:46px;flex:none;">⚡️</div><div class="goalinfo"><h3>Adaptive daily mix</h3><p>Pulls your due reviews, weak spots and a few new items at ${S.cefr} — interleaved for better retention.</p></div></div>
       <button class="btn" style="margin-top:18px;" onclick="startDaily()">Start daily mix →</button>
       ${rc>0?`<button class="btn warn" style="margin-top:12px;" onclick="startReview()">Review ${rc} weak item${rc>1?'s':''}</button>`:''}</div>
+    ${(function(){const e=S.exam||{best:0,attempts:0};const passed=e.best>=60;
+      return `<div class="glass card"><div class="sec-label" style="margin:0 0 8px;">B1 mock exam</div>
+      <div style="display:flex;align-items:center;gap:14px;"><div style="font-size:38px;">${passed?"🎓":"📝"}</div>
+        <div style="flex:1;"><div style="font-weight:800;">${EXAM_N} questions · ${EXAM_MIN} minutes</div>
+        <div style="font-size:12px;color:var(--txt-faint);margin-top:3px;">${e.attempts?`Best ${e.best}% · ${e.attempts} attempt${e.attempts>1?"s":""} · ${passed?"passed ✓":"pass mark 60%"}`:"Exam conditions: timed, no feedback until the end."}</div></div></div>
+      <button class="btn ${passed?"ghost":""}" style="margin-top:16px;" onclick="startExam()">${e.attempts?"Retake exam":"Start exam"} →</button></div>`;})()}
+    <div class="sec-label">Stories & speaking</div>
+    <div class="modes">
+      <div class="glass mode" onclick="view='stories';render();"><span class="emoji">📖</span><h4>Stories</h4><p>${STORIES.filter(s=>storyRec(s.id).done).length}/${STORIES.length} dialogues read</p></div>
+      <div class="glass mode" onclick="startSpeaking()"><span class="emoji">🎤</span><h4>Speaking</h4><p>${SR_OK?"Say phrases out loud":"Needs Chrome / Safari"}</p></div>
+    </div>
     <div class="sec-label">Games</div>
     <div class="modes">
       <div class="glass mode" onclick="startMatch()"><span class="emoji">🃏</span><h4>Word Match</h4><p>Tap matching pairs against the clock</p></div>
@@ -11626,7 +11866,7 @@ function viewInsights(){
   const fixes=weakItems().slice(0,6);
   const confs=Object.entries(S.conf).sort((a,b)=>b[1]-a[1]).slice(0,3);
   const days=[];for(let i=6;i>=0;i--){const d=new Date(Date.now()-i*DAY).toISOString().slice(0,10);let xp=d===S.todayDate?S.todayXP:(S.history.find(h=>h.date===d)?.xp||0);days.push({xp,lbl:["Su","Mo","Tu","We","Th","Fr","Sa"][new Date(d).getDay()]});}const maxXP=Math.max(30,...days.map(d=>d.xp));
-  return `<div class="fade"><div class="top"><div><div class="hi">Where you stand · ${S.cefr}</div><div class="title">Insights</div></div><div class="glass streak"><span class="fire">🔥</span>${S.streak}</div></div>
+  return `<div class="fade"><div class="top"><div><div class="hi">Where you stand · ${S.cefr}</div><div class="title">Insights</div></div><div class="glass streak"><span class="fire">🔥</span>${S.streak}${S.freezes?`<span style="margin-left:6px;font-size:12px;opacity:.85;">🧊${S.freezes}</span>`:""}</div></div>
     <div class="stats"><div class="glass stat"><b>${S.xp}</b><span>TOTAL XP</span></div><div class="glass stat"><b>${overall}%</b><span>ACCURACY</span></div><div class="glass stat"><b>${dist.mastered}</b><span>MASTERED</span></div></div>
     <div class="glass card"><div class="sec-label" style="margin:0 0 10px;">Mastery of ${elig.length} items at ${S.cefr}</div>
       <div class="dist">${["mastered","review","learning","new"].map(s=>`<span style="width:${100*dist[s]/tot}%;background:${cols[s]};"></span>`).join("")}</div>
@@ -11636,10 +11876,13 @@ function viewInsights(){
     <div class="glass card">${pats.length?pats.map(p=>`<div class="flaw"><div class="body"><div class="n" style="font-size:14px;">${p.k}</div><div class="bar"><i style="width:${p.pct}%;background:${p.pct>=80?'var(--good)':p.pct>=50?'var(--gold)':'var(--bad)'};"></i></div><div style="font-size:11px;color:var(--txt-faint);margin-top:5px;">${p.n} answered</div></div><div class="v" style="color:${p.pct>=80?'var(--good)':p.pct>=50?'var(--gold)':'var(--bad)'}">${p.pct}%</div></div>`).join(""):'<p class="empty">Answer a few questions and your weak patterns appear here.</p>'}</div>
     ${confs.length?`<div class="sec-label">Common mix-ups</div><div class="glass card">${confs.map(([k,n])=>`<div style="padding:9px 0;border-bottom:1px solid var(--stroke-soft);font-size:13px;color:var(--txt-dim);">${k} <b style="color:var(--bad)">×${n}</b></div>`).join("")}</div>`:""}
     ${fixes.length?`<div class="sec-label">Drill your worst items</div><div class="glass card">${fixes.map(it=>{const m=S.mem[it.id];const r=Math.round(ratio(m)*100);return `<div class="fixrow" onclick="drillItem('${esc(it.id)}')"><div class="ic">${SKILLS[it.skill].emoji}</div><div class="lab"><div class="t">${it.label}</div><div class="m">${it.bucket} · ${m.reps} tries${m.lapses?` · ${m.lapses} relapse${m.lapses>1?'s':''}`:''}</div></div><div class="r" style="color:${r<50?'var(--bad)':'var(--gold)'}">${r}%</div></div>`;}).join("")}<button class="btn warn" style="margin-top:16px;" onclick="startReview()">Review all weak items</button></div>`:""}
+    ${achCard()}
     <div class="glass card"><div class="sec-label" style="margin:0 0 10px;">Settings</div>
       <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><span style="font-weight:700;">Daily goal</span><div>${[250,400,600].map(g=>`<span class="pill" style="cursor:pointer;${S.goal===g?'background:var(--accent);border-color:var(--accent);':''}" onclick="setGoal(${g})">${g} XP</span>`).join("")}</div></div>
       <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;"><span style="font-weight:700;">Sound effects</span><span class="pill" style="cursor:pointer;${!S.muted?'background:var(--accent);border-color:var(--accent);':''}" onclick="toggleMute()">${S.muted?'🔇 Off':'🔊 On'}</span></div>
       <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;"><span style="font-weight:700;">Voice</span>${(function(){var vs=deVoices();if(!vs.length)return '<span style=\'color:var(--txt-faint);font-size:12px;\'>tap a word first, then reopen</span>';return '<select onchange="setVoice(this.value)" style="max-width:62%;padding:8px 10px;border-radius:10px;background:var(--glass-strong);color:var(--txt);border:1px solid var(--stroke);font-size:13px;">'+vs.map(function(x){return '<option value="'+x.voiceURI+'"'+(x.voiceURI===S.voiceURI?' selected':'')+'>'+x.name+' ('+x.lang+')</option>';}).join('')+'</select>';})()}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;"><span style="font-weight:700;">Streak freezes</span><span style="font-size:13px;color:var(--txt-dim);">${"\ud83e\uddca".repeat(S.freezes||0)||"none yet"} \u00b7 ${10-(S.freezeProg||0)} lesson${10-(S.freezeProg||0)===1?"":"s"} to next</span></div>
+      <button class="btn ghost" style="margin-top:14px;" onclick="startPlacement()">\ud83e\udded ${S.placed?"Retake":"Take"} placement test</button>
       <div style="display:flex;gap:10px;margin-top:14px;"><button class="btn ghost" style="flex:1;" onclick="exportProgress()">\u2193 Backup</button><label class="btn ghost" style="flex:1;text-align:center;cursor:pointer;">\u2191 Restore<input type="file" accept="application/json,.json" style="display:none" onchange="importProgress(this)"></label></div>
       <button class="btn ghost" style="margin-top:16px;" onclick="resetAll()">Reset all progress</button></div></div>`;
 }
@@ -11664,46 +11907,59 @@ function runSession(){
   sess.cur=q;sess.locked=false;sess.qStart=Date.now();
   const prog=Math.round(100*sess.answered/(sess.answered+sess.queue.length));
   let optsHtml;
-  if(q.type==="type"){optsHtml=`<div class="typewrap"><input class="typein" id="tin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type your answer…"/><button class="btn" id="tsub" onclick="answerType()">Check</button></div>`;}
+  if(q.type==="type"){optsHtml=`<div class="typewrap"><input class="typein" id="tin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type your answer…"/><div style="display:flex;gap:8px;justify-content:center;margin:10px 0 2px;">${["ä","ö","ü","ß"].map(c=>`<div class="glass" style="padding:8px 16px;border-radius:10px;cursor:pointer;font-weight:800;font-size:16px;" onclick="umlIns('${c}')">${c}</div>`).join("")}</div><button class="btn" id="tsub" onclick="answerType()">Check</button></div>`;}
+  else if(q.type==="speak"){optsHtml=`<div style="text-align:center;"><div id="srstatus" style="min-height:22px;font-size:14px;color:var(--txt-dim);margin-bottom:12px;">Tap the mic, then say the sentence out loud</div><div class="glass" id="micbtn" onclick="startRec()" style="width:88px;height:88px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:40px;cursor:pointer;margin:0 auto;">🎤</div><div style="margin-top:16px;"><button class="btn ghost" id="srskip" onclick="skipSpeak()" style="max-width:260px;margin:0 auto;">Can't speak right now — skip</button></div></div>`;}
   else if(q.type==="build"){sess.build={bank:q.words.slice(),picked:[]};optsHtml=`<div class="buildans" id="bans"></div><div class="buildbank" id="bbank"></div><button class="btn" id="bsub" onclick="answerBuild()">Check</button>`;}
   else{optsHtml=`<div class="opts" id="opts">${q.opts.map((o,idx)=>`<div class="opt" data-i="${idx}" onclick="answer(this,${idx})">${o}</div>`).join("")}</div>`;}
   const combo=sess.combo>=2?`<div style="text-align:center;font-weight:800;color:var(--gold);font-size:13px;margin-bottom:6px;">🔥 ${sess.combo} streak · x${comboMult(sess.combo+1)} next</div>`:"";
   screen.innerHTML=`<div class="center"><div class="fade">
-    <div class="q-head"><div class="glass q-back" onclick="quitSession()">←</div><div class="q-prog"><i style="width:${prog}%"></i></div><div class="q-x">${sess.mode==="review"?"⟳":""} ${sess.answered+1}</div></div>
+    <div class="q-head"><div class="glass q-back" onclick="quitSession()">←</div><div class="q-prog"><i style="width:${prog}%"></i></div><div class="q-x">${sess.mode==="exam"?`⏱ <span id="extime">${fmtMS(examLeft())}</span>`:sess.mode==="placement"?`🧭 ${sess.answered+1}/${sess.answered+sess.queue.length}`:`${sess.mode==="review"?"⟳":""} ${sess.answered+1}`}</div></div>
     ${combo}
     <div class="glass prompt pop"><span class="lvtag ${sess.mode==='review'?'rev':''}">${sess.mode==="review"?"REVIEW · ":""}${q.lvl}</span><div class="small">${q.promptSmall}</div><div class="word">${q.prompt}</div>${q.sub?`<div class="sub">${q.sub}</div>`:''}${q.speak?`<div class="glass speak" onclick="speak('${esc(q.speak)}')">🔊 Hören</div>`:''}</div>
     <div class="feedback" id="fb"></div>${optsHtml}</div></div>`;
   renderTabs();
-  const tb=$("#tb");if(tb){tb.style.transitionDuration=QTIME+"ms";requestAnimationFrame(()=>{tb.style.width="0%";});}
   if(q.type==="build")renderBuild();
   if(q.type==="type"){const inp=$("#tin");setTimeout(()=>inp&&inp.focus(),60);if(inp)inp.addEventListener("keydown",e=>{if(e.key==="Enter")answerType();});}
   if(q.autospeak)setTimeout(()=>speak(q.speak),350);
 }
 window.runSession=runSession;
-window.quitSession=()=>{sess=null;view="today";render();};
+window.quitSession=()=>{if(examTimer){clearInterval(examTimer);examTimer=null;}sess=null;view="today";render();};
 
 function advance(q,correct){
-  sess.answered++;if(correct)sess.correct++;sess.log.push({label:REGMAP[q.itemId].label,correct});
+  sess.answered++;if(correct)sess.correct++;
+  sess.log.push({label:REGMAP[q.itemId].label,correct,lvl:q.lvl,skill:q.skill});
   sess.queue.shift();
-  if(!correct&&!sess.relearn.has(q.itemId)){sess.relearn.add(q.itemId);const pos=Math.min(3,sess.queue.length);sess.queue.splice(pos,0,q.itemId);}
-  setTimeout(()=>runSession(),correct?850:1900);
+  const graded=sess.mode==="placement"||sess.mode==="exam"; // tests never resurface a missed item
+  if(!graded&&!correct&&!sess.relearn.has(q.itemId)){sess.relearn.add(q.itemId);const pos=Math.min(3,sess.queue.length);sess.queue.splice(pos,0,q.itemId);}
+  setTimeout(()=>runSession(),sess.mode==="exam"?260:(correct?850:1900));
 }
 // shared scoring: combo multiplier, speed bonus, sound, haptics, shake
 function onGraded(q,correct,chosen){
   const dt=Date.now()-(sess.qStart||Date.now());let bonus=0;
-  if(correct){sess.combo++;sess.maxCombo=Math.max(sess.maxCombo,sess.combo);const mult=comboMult(sess.combo);const speed=dt<3500?4:dt<7000?2:0;bonus=(mult-1)*8+speed;sfx("ok");haptic(30);if(sess.combo>=3||speed)showCombo((sess.combo>=3?"🔥 x"+mult+" combo":"⚡ schnell")+"  +"+(8+bonus)+" XP");}
-  else{sess.combo=0;sfx("no");haptic([40,30,40]);const pr=document.querySelector(".prompt");if(pr){pr.classList.remove("shake");void pr.offsetWidth;pr.classList.add("shake");}}
+  const quiet=sess.mode==="exam"; // under exam conditions we never reveal whether it was right
+  if(q.type==="speak"&&!S.spokeOnce){S.spokeOnce=true;save();}
+  if(correct){
+    sess.combo++;sess.maxCombo=Math.max(sess.maxCombo,sess.combo);
+    const mult=comboMult(sess.combo);const speed=dt<3500?4:dt<7000?2:0;bonus=(mult-1)*8+speed;
+    if(!quiet){sfx("ok");haptic(30);questBump("combo",sess.combo,"max");
+      if(sess.combo>=3||speed)showCombo((sess.combo>=3?"🔥 x"+mult+" combo":"⚡ schnell")+"  +"+(8+bonus)+" XP");}
+  }else{
+    sess.combo=0;
+    if(!quiet){sfx("no");haptic([40,30,40]);const pr=document.querySelector(".prompt");if(pr){pr.classList.remove("shake");void pr.offsetWidth;pr.classList.add("shake");}}
+  }
   grade(q,correct,chosen,bonus);advance(q,correct);
 }
-function fbCorrect(){const fb=$("#fb");fb.textContent="Richtig!";fb.className="feedback g";}
-function fbWrong(ansHTML,ex){const fb=$("#fb");fb.className="feedback b";fb.innerHTML=`Answer: <b>${ansHTML}</b>`+(ex?`<div style="font-size:14px;font-weight:700;color:var(--txt-dim);margin-top:4px;">${ex}</div>`:"");}
-function frListen(t){if(!t)return;const fb=$("#fb");if(fb)fb.innerHTML+=`<div class="glass speak" style="margin-top:10px;display:inline-flex;" onclick="speak('${esc(t)}')">🔊 ${t}</div>`;speak(t);}
+const examQuiet=()=>!!(sess&&sess.mode==="exam");
+function fbCorrect(){if(examQuiet())return;const fb=$("#fb");if(!fb)return;fb.textContent="Richtig!";fb.className="feedback g";}
+function fbWrong(ansHTML,ex){if(examQuiet())return;const fb=$("#fb");if(!fb)return;fb.className="feedback b";fb.innerHTML=`Answer: <b>${ansHTML}</b>`+(ex?`<div style="font-size:14px;font-weight:700;color:var(--txt-dim);margin-top:4px;">${ex}</div>`:"");}
+function frListen(t){if(!t||examQuiet())return;const fb=$("#fb");if(fb)fb.innerHTML+=`<div class="glass speak" style="margin-top:10px;display:inline-flex;" onclick="speak('${esc(t)}')">🔊 ${t}</div>`;speak(t);}
 window.answer=(el,idx)=>{const q=sess.cur;if(el.parentElement.dataset.locked)return;el.parentElement.dataset.locked="1";const chosen=q.opts[idx];const correct=chosen===q.a;
-  document.querySelectorAll("#opts .opt").forEach(o=>{const t=q.opts[o.dataset.i];if(t===q.a)o.classList.add("correct");else if(+o.dataset.i===idx)o.classList.add("wrong");else o.classList.add("dim");});
+  if(examQuiet())document.querySelectorAll("#opts .opt").forEach(o=>{if(+o.dataset.i!==idx)o.classList.add("dim");});
+  else document.querySelectorAll("#opts .opt").forEach(o=>{const t=q.opts[o.dataset.i];if(t===q.a)o.classList.add("correct");else if(+o.dataset.i===idx)o.classList.add("wrong");else o.classList.add("dim");});
   if(correct){fbCorrect();}else fbWrong(q.a,q.ex);frListen(q.speak||q.a);
   onGraded(q,correct,chosen);};
 window.answerType=()=>{const q=sess.cur;const inp=$("#tin");if(!inp||inp.disabled)return;const val=norm(inp.value);if(!val)return;const correct=q.accept.includes(val);
-  inp.disabled=true;inp.classList.add(correct?"correct":"wrong");const sub=$("#tsub");if(sub)sub.style.display="none";
+  inp.disabled=true;if(!examQuiet())inp.classList.add(correct?"correct":"wrong");const sub=$("#tsub");if(sub)sub.style.display="none";
   if(correct){fbCorrect();}else fbWrong(q.a,q.ex);frListen(q.speak||q.a);
   onGraded(q,correct,inp.value.trim());};
 /* tap-to-build sentence */
@@ -11719,10 +11975,14 @@ window.answerBuild=()=>{const q=sess.cur;if(sess.locked||!sess.build.picked.leng
   onGraded(q,correct,assembled);};
 
 function showResult(){
+  if(sess.mode==="placement")return placementResult();
+  if(sess.mode==="exam")return examResult();
   const total=sess.answered||1;const pct=Math.round(100*sess.correct/total);
   if((sess.maxCombo||0)>(S.bestCombo||0)){S.bestCombo=sess.maxCombo;save();}
   let lessonMsg="",lessonBtns="";
-  if(sess.mode==="lesson"){const L=LESSONS[sess.lessonIdx];const rec=lsRec(L);const pass=pct>=60;if(pass)rec.done=true;rec.best=Math.max(rec.best,pct);rec.stars=Math.max(rec.stars,pct>=100?3:pct>=80?2:pass?1:0);S.lessons[L.id]=rec;save();
+  if(sess.mode==="lesson"){const L=LESSONS[sess.lessonIdx];const rec=lsRec(L);const wasDone=rec.done;const pass=pct>=60;if(pass)rec.done=true;rec.best=Math.max(rec.best,pct);rec.stars=Math.max(rec.stars,pct>=100?3:pct>=80?2:pass?1:0);S.lessons[L.id]=rec;
+    if(pass){questBump("lesson",1);if(pct>=100)questBump("perfect",1);if(!wasDone)earnFreeze();}
+    save();checkAch();
     const ni=sess.lessonIdx+1;
     if(pass){lessonMsg=`<div style="font-weight:800;color:var(--gold);font-size:22px;margin:4px 0;">${"★".repeat(rec.stars)}${"☆".repeat(3-rec.stars)}</div><p style="margin:0 0 14px;color:var(--good);font-weight:800;">Lesson complete!</p>`;
       lessonBtns=(ni<LESSONS.length&&lsUnlocked(ni))?`<button class="btn" onclick="startLesson(${ni})">Next lesson →</button><button class="btn ghost" style="margin-top:12px;" onclick="view='map';sess=null;render();">Back to map</button>`:`<button class="btn" onclick="view='map';sess=null;render();">Back to map 🎉</button>`;
@@ -11779,37 +12039,560 @@ function matchDone(){
   renderTabs();match=null;
 }
 
-/* ===================== CURRICULUM / MAP ===================== */
-const SKILL_ORDER={vocab:0,grammar:1,verbs:2,phrases:3};
-function lessonTitle(b){const p=b.split(" · ");let t=p[1]||b;if(t==="phrases")t="Phrases";if(p[0]==="Verbs")t=t+" verbs";if(p[0]==="Grammar")t=t.replace(/\s*\(.*\)/,"");if(p[0]==="Vocabulary")t=t+" words";return t;}
-const LESSONS=(function(){const out=[];const per=6;for(const lvl of LEVELS){const items=REG.filter(it=>it.lvl===lvl).map(it=>it.id);if(!items.length)continue;for(let k=0;k<64;k++){const ids=[];for(let j=0;j<per;j++)ids.push(items[(k*per+j)%items.length]);const uniq=[...new Set(ids)];const skill=REGMAP[uniq[0]].skill;out.push({id:lvl+"|L"+k,lvl,skill,items:uniq,title:"Lesson "+(k+1)});}}out.forEach((l,i)=>l.idx=i);return out;})();
+/* ===================== STORIES (interactive dialogues) ===================== */
+const STORIES=[
+{id:"a1-cafe",lvl:"A1",emoji:"☕",title:"Im Café",
+ lines:[["Kellner","Guten Tag! Was möchten Sie?","Good day! What would you like?"],
+  ["Anna","Guten Tag. Ich möchte einen Kaffee, bitte.","Good day. I would like a coffee, please."],
+  ["Kellner","Mit Milch und Zucker?","With milk and sugar?"],
+  ["Anna","Nur mit Milch, danke.","Only with milk, thanks."],
+  ["Kellner","Möchten Sie auch einen Kuchen?","Would you like a cake too?"],
+  ["Anna","Ja, ein Stück Apfelkuchen, bitte.","Yes, a piece of apple cake, please."],
+  ["Kellner","Gerne. Das macht sechs Euro.","Gladly. That's six euros."],
+  ["Anna","Hier bitte. Der Kuchen schmeckt sehr gut!","Here you go. The cake tastes very good!"]],
+ qs:[{after:1,q:"What does Anna order first?",opts:["a coffee","a tea","a cake"],a:"a coffee"},
+  {after:3,q:"How does Anna take her coffee?",opts:["only with milk","with milk and sugar","black"],a:"only with milk"},
+  {after:6,q:"How much does it cost?",opts:["six euros","seven euros","three euros"],a:"six euros"}]},
+{id:"a1-markt",lvl:"A1",emoji:"🍏",title:"Auf dem Markt",
+ lines:[["Verkäufer","Guten Morgen! Was brauchen Sie?","Good morning! What do you need?"],
+  ["Tom","Guten Morgen. Ich brauche Äpfel.","Good morning. I need apples."],
+  ["Verkäufer","Die roten Äpfel sind heute sehr gut.","The red apples are very good today."],
+  ["Tom","Super. Ich nehme ein Kilo, bitte.","Great. I'll take one kilo, please."],
+  ["Verkäufer","Sonst noch etwas?","Anything else?"],
+  ["Tom","Ja, haben Sie Brot?","Yes, do you have bread?"],
+  ["Verkäufer","Nein, leider nicht. Brot gibt es beim Bäcker.","No, unfortunately not. Bread is at the baker's."],
+  ["Tom","Kein Problem. Dann nur die Äpfel. Danke schön!","No problem. Then just the apples. Thank you!"]],
+ qs:[{after:1,q:"What does Tom need?",opts:["apples","bread","milk"],a:"apples"},
+  {after:3,q:"How many apples does Tom take?",opts:["one kilo","two kilos","three apples"],a:"one kilo"},
+  {after:6,q:"Why doesn't Tom get bread?",opts:["the market doesn't sell it","it's too expensive","he forgot his money"],a:"the market doesn't sell it"}]},
+{id:"a1-nachbarin",lvl:"A1",emoji:"🏡",title:"Die neue Nachbarin",
+ lines:[["Lena","Hallo! Ich bin Lena. Ich bin neu hier.","Hello! I'm Lena. I'm new here."],
+  ["Herr Braun","Hallo Lena! Ich heiße Braun. Willkommen!","Hello Lena! My name is Braun. Welcome!"],
+  ["Lena","Danke! Wohnen Sie schon lange hier?","Thanks! Have you lived here long?"],
+  ["Herr Braun","Ja, seit zehn Jahren. Woher kommen Sie?","Yes, for ten years. Where are you from?"],
+  ["Lena","Ich komme aus Österreich, aus Wien.","I come from Austria, from Vienna."],
+  ["Herr Braun","Schön! Und was machen Sie beruflich?","Nice! And what do you do for work?"],
+  ["Lena","Ich bin Lehrerin. Ich arbeite an der Schule hier.","I'm a teacher. I work at the school here."],
+  ["Herr Braun","Wunderbar. Bis bald, Lena!","Wonderful. See you soon, Lena!"]],
+ qs:[{after:2,q:"Who is new in the building?",opts:["Lena","Herr Braun","nobody"],a:"Lena"},
+  {after:4,q:"Where is Lena from?",opts:["Vienna","Berlin","Zurich"],a:"Vienna"},
+  {after:6,q:"What is Lena's job?",opts:["teacher","doctor","baker"],a:"teacher"}]},
+{id:"a1-zug",lvl:"A1",emoji:"🚆",title:"Im Zug",
+ lines:[["Schaffner","Guten Tag, Ihre Fahrkarte, bitte.","Good day, your ticket please."],
+  ["Paul","Einen Moment... hier, bitte.","One moment... here you go."],
+  ["Schaffner","Danke. Wohin fahren Sie?","Thanks. Where are you traveling to?"],
+  ["Paul","Ich fahre nach München, zu meiner Schwester.","I'm going to Munich, to my sister's."],
+  ["Schaffner","Der Zug hat heute zehn Minuten Verspätung.","The train is ten minutes late today."],
+  ["Paul","Kein Problem. Wann kommen wir an?","No problem. When do we arrive?"],
+  ["Schaffner","Um halb drei.","At half past two."],
+  ["Paul","Danke schön. Auf Wiedersehen!","Thank you. Goodbye!"]],
+ qs:[{after:3,q:"Where is Paul going?",opts:["to Munich","to Berlin","to Hamburg"],a:"to Munich"},
+  {after:4,q:"What's the problem with the train?",opts:["it's ten minutes late","it's cancelled","it's full"],a:"it's ten minutes late"},
+  {after:6,q:"\"Um halb drei\" means…",opts:["at 2:30","at 3:30","at 3:00"],a:"at 2:30"}]},
+{id:"a1-fruehstueck",lvl:"A1",emoji:"🥐",title:"Das Frühstück",
+ lines:[["Mama","Guten Morgen! Das Frühstück ist fertig.","Good morning! Breakfast is ready."],
+  ["Felix","Guten Morgen, Mama. Ich habe Hunger!","Good morning, Mom. I'm hungry!"],
+  ["Mama","Es gibt Brot, Käse und Eier.","There's bread, cheese and eggs."],
+  ["Felix","Haben wir auch Orangensaft?","Do we also have orange juice?"],
+  ["Mama","Nein, aber wir haben Milch.","No, but we have milk."],
+  ["Felix","Okay. Wo ist Papa?","Okay. Where is Dad?"],
+  ["Mama","Er arbeitet heute früh. Er ist schon im Büro.","He works early today. He's already at the office."],
+  ["Felix","Dann esse ich sein Ei!","Then I'll eat his egg!"]],
+ qs:[{after:2,q:"What is for breakfast?",opts:["bread, cheese and eggs","cereal and fruit","pancakes"],a:"bread, cheese and eggs"},
+  {after:4,q:"What do they have to drink?",opts:["milk","orange juice","coffee"],a:"milk"},
+  {after:6,q:"Where is Dad?",opts:["at the office","sleeping","shopping"],a:"at the office"}]},
+{id:"a2-schluessel",lvl:"A2",emoji:"🔑",title:"Der verlorene Schlüssel",
+ lines:[["Max","Oh nein! Ich finde meinen Schlüssel nicht!","Oh no! I can't find my key!"],
+  ["Sara","Hast du in deiner Jacke gesucht?","Did you look in your jacket?"],
+  ["Max","Ja, da ist er nicht. Ich habe ihn heute Morgen noch gehabt.","Yes, it's not there. I still had it this morning."],
+  ["Sara","Wo bist du heute gewesen?","Where have you been today?"],
+  ["Max","Ich bin im Supermarkt und im Fitnessstudio gewesen.","I was at the supermarket and the gym."],
+  ["Sara","Dann ruf doch das Fitnessstudio an!","Then call the gym!"],
+  ["Max","Gute Idee... Hallo? Haben Sie einen Schlüssel gefunden?","Good idea... Hello? Have you found a key?"],
+  ["Max","Ja! Er liegt dort an der Rezeption. Zum Glück!","Yes! It's there at the reception. Thank goodness!"]],
+ qs:[{after:0,q:"Was ist das Problem?",opts:["Max findet seinen Schlüssel nicht","Max ist krank","Max hat kein Geld"],a:"Max findet seinen Schlüssel nicht"},
+  {after:4,q:"Wo ist Max heute gewesen?",opts:["im Supermarkt und im Fitnessstudio","in der Schule","im Kino"],a:"im Supermarkt und im Fitnessstudio"},
+  {after:7,q:"Wo ist der Schlüssel?",opts:["an der Rezeption","in der Jacke","im Auto"],a:"an der Rezeption"}]},
+{id:"a2-arzt",lvl:"A2",emoji:"🩺",title:"Ein Termin beim Arzt",
+ lines:[["Praxis","Praxis Dr. Weber, guten Tag.","Dr. Weber's office, good day."],
+  ["Nina","Guten Tag. Ich möchte einen Termin machen.","Good day. I'd like to make an appointment."],
+  ["Praxis","Was fehlt Ihnen denn?","What's wrong?"],
+  ["Nina","Ich habe seit drei Tagen Kopfschmerzen und Fieber.","I've had a headache and fever for three days."],
+  ["Praxis","Können Sie morgen um neun Uhr kommen?","Can you come tomorrow at nine?"],
+  ["Nina","Morgen muss ich arbeiten. Geht es auch am Nachmittag?","Tomorrow I have to work. Is the afternoon possible too?"],
+  ["Praxis","Ja, um 16 Uhr ist noch ein Termin frei.","Yes, there's still a slot at 4 pm."],
+  ["Nina","Perfekt, dann komme ich um 16 Uhr. Vielen Dank!","Perfect, I'll come at 4 pm. Thank you!"]],
+ qs:[{after:3,q:"Was hat Nina?",opts:["Kopfschmerzen und Fieber","Bauchschmerzen","Husten"],a:"Kopfschmerzen und Fieber"},
+  {after:5,q:"Warum kann Nina morgen früh nicht?",opts:["Sie muss arbeiten","Sie ist im Urlaub","Sie hat keine Zeit am Nachmittag"],a:"Sie muss arbeiten"},
+  {after:7,q:"Wann ist der Termin?",opts:["um 16 Uhr","um 9 Uhr","um 12 Uhr"],a:"um 16 Uhr"}]},
+{id:"a2-wochenende",lvl:"A2",emoji:"🎬",title:"Das Wochenende",
+ lines:[["Emma","Hi Ben! Was hast du am Wochenende gemacht?","Hi Ben! What did you do on the weekend?"],
+  ["Ben","Ich bin am Samstag ins Kino gegangen.","I went to the movies on Saturday."],
+  ["Emma","Welchen Film hast du gesehen?","Which movie did you see?"],
+  ["Ben","Einen Krimi. Er war wirklich spannend! Und du?","A crime film. It was really exciting! And you?"],
+  ["Emma","Ich habe meine Großeltern besucht.","I visited my grandparents."],
+  ["Ben","Wie schön! Was habt ihr gemacht?","How nice! What did you do?"],
+  ["Emma","Wir haben zusammen gekocht und viel geredet.","We cooked together and talked a lot."],
+  ["Ben","Das klingt gemütlich. Nächstes Mal gehen wir zusammen ins Kino!","That sounds cozy. Next time we'll go to the movies together!"]],
+ qs:[{after:1,q:"Was hat Ben am Samstag gemacht?",opts:["Er ist ins Kino gegangen","Er hat gekocht","Er hat gearbeitet"],a:"Er ist ins Kino gegangen"},
+  {after:3,q:"Wie war der Film?",opts:["spannend","langweilig","traurig"],a:"spannend"},
+  {after:6,q:"Was hat Emma mit den Großeltern gemacht?",opts:["gekocht und geredet","einen Film gesehen","Fußball gespielt"],a:"gekocht und geredet"}]},
+{id:"a2-kaufhaus",lvl:"A2",emoji:"🧥",title:"Im Kaufhaus",
+ lines:[["Verkäuferin","Kann ich Ihnen helfen?","Can I help you?"],
+  ["Lisa","Ja, ich suche eine Jacke für den Winter.","Yes, I'm looking for a jacket for winter."],
+  ["Verkäuferin","Welche Größe haben Sie?","What size are you?"],
+  ["Lisa","Größe 38. Haben Sie diese Jacke auch in Blau?","Size 38. Do you have this jacket in blue too?"],
+  ["Verkäuferin","Ja, hier bitte. Möchten Sie sie anprobieren?","Yes, here you go. Would you like to try it on?"],
+  ["Lisa","Ja, gern... Sie passt perfekt! Was kostet sie?","Yes, gladly... It fits perfectly! What does it cost?"],
+  ["Verkäuferin","Neunzig Euro. Heute gibt es zwanzig Prozent Rabatt.","Ninety euros. Today there's a twenty percent discount."],
+  ["Lisa","Super, dann nehme ich sie!","Great, then I'll take it!"]],
+ qs:[{after:1,q:"Was sucht Lisa?",opts:["eine Winterjacke","ein Kleid","Schuhe"],a:"eine Winterjacke"},
+  {after:3,q:"Welche Farbe möchte Lisa?",opts:["Blau","Rot","Schwarz"],a:"Blau"},
+  {after:6,q:"Was ist heute besonders?",opts:["Es gibt 20% Rabatt","Die Jacke ist gratis","Das Kaufhaus schließt früh"],a:"Es gibt 20% Rabatt"}]},
+{id:"b1-interview",lvl:"B1",emoji:"💼",title:"Das Vorstellungsgespräch",
+ lines:[["Chefin","Guten Tag, Herr Kim. Erzählen Sie etwas über sich.","Good day, Mr. Kim. Tell us something about yourself."],
+  ["Herr Kim","Gern. Ich habe drei Jahre als Verkäufer gearbeitet und suche jetzt eine neue Herausforderung.","Gladly. I worked as a salesperson for three years and am now looking for a new challenge."],
+  ["Chefin","Warum haben Sie sich bei uns beworben?","Why did you apply with us?"],
+  ["Herr Kim","Weil Ihre Firma einen sehr guten Ruf hat und ich gern im Team arbeite.","Because your company has a very good reputation and I like working in a team."],
+  ["Chefin","Was sind Ihre Stärken?","What are your strengths?"],
+  ["Herr Kim","Ich bin zuverlässig und lerne schnell. Außerdem spreche ich drei Sprachen.","I'm reliable and learn quickly. I also speak three languages."],
+  ["Chefin","Sehr gut. Wann könnten Sie anfangen?","Very good. When could you start?"],
+  ["Herr Kim","Ich könnte schon nächsten Monat anfangen.","I could start as early as next month."],
+  ["Chefin","Wunderbar. Wir melden uns bei Ihnen. Vielen Dank!","Wonderful. We'll be in touch. Thank you!"]],
+ qs:[{after:1,q:"Was hat Herr Kim vorher gemacht?",opts:["Er hat als Verkäufer gearbeitet","Er hat studiert","Er war arbeitslos"],a:"Er hat als Verkäufer gearbeitet"},
+  {after:3,q:"Warum hat er sich beworben?",opts:["Die Firma hat einen guten Ruf","Das Gehalt ist hoch","Das Büro ist in seiner Stadt"],a:"Die Firma hat einen guten Ruf"},
+  {after:5,q:"Welche Stärken nennt er?",opts:["zuverlässig und lernt schnell","kreativ und sportlich","streng und pünktlich"],a:"zuverlässig und lernt schnell"}]},
+{id:"b1-wohnung",lvl:"B1",emoji:"🔎",title:"Die Wohnungssuche",
+ lines:[["Makler","Willkommen! Das ist die Wohnung: drei Zimmer, Küche und Balkon.","Welcome! This is the apartment: three rooms, kitchen and balcony."],
+  ["Julia","Schön hell! Wie hoch ist die Miete?","Nice and bright! How high is the rent?"],
+  ["Makler","950 Euro kalt, plus 200 Euro Nebenkosten.","950 euros cold, plus 200 euros utilities."],
+  ["Julia","Hm, das ist mehr, als ich dachte.","Hm, that's more than I thought."],
+  ["Makler","Dafür wurde die Küche letztes Jahr komplett renoviert.","In return, the kitchen was completely renovated last year."],
+  ["Julia","Das stimmt. Und die Lage ist perfekt — die Haltestelle ist direkt um die Ecke.","That's true. And the location is perfect — the stop is right around the corner."],
+  ["Makler","Es gibt allerdings noch andere Interessenten.","However, there are other interested people."],
+  ["Julia","Ich verstehe. Ich muss es mir übers Wochenende überlegen.","I understand. I have to think it over during the weekend."],
+  ["Makler","Natürlich. Melden Sie sich bis Montag, sonst ist sie weg!","Of course. Get in touch by Monday, otherwise it's gone!"]],
+ qs:[{after:2,q:"Wie viel kostet die Wohnung insgesamt im Monat?",opts:["1150 Euro","950 Euro","200 Euro"],a:"1150 Euro"},
+  {after:4,q:"Was wurde letztes Jahr renoviert?",opts:["die Küche","das Bad","der Balkon"],a:"die Küche"},
+  {after:7,q:"Was macht Julia jetzt?",opts:["Sie überlegt es sich übers Wochenende","Sie nimmt die Wohnung sofort","Sie sucht einen anderen Makler"],a:"Sie überlegt es sich übers Wochenende"}]},
+{id:"b1-zukunft",lvl:"B1",emoji:"🌍",title:"Pläne für die Zukunft",
+ lines:[["Mia","Stell dir vor: Meine Firma bietet mir eine Stelle in Hamburg an!","Imagine: my company is offering me a job in Hamburg!"],
+  ["David","Wow! Und? Wirst du das Angebot annehmen?","Wow! And? Will you accept the offer?"],
+  ["Mia","Ich bin mir nicht sicher. Einerseits wäre es eine tolle Chance...","I'm not sure. On the one hand it would be a great opportunity..."],
+  ["David","Und andererseits?","And on the other hand?"],
+  ["Mia","Andererseits müsste ich umziehen und meine Freunde hier verlassen.","On the other hand I would have to move and leave my friends here."],
+  ["David","Wenn ich du wäre, würde ich es machen. Hamburg ist wunderschön!","If I were you, I would do it. Hamburg is beautiful!"],
+  ["Mia","Vielleicht hast du Recht. Je länger ich warte, desto schwieriger wird die Entscheidung.","Maybe you're right. The longer I wait, the harder the decision gets."],
+  ["David","Genau. Und wir könnten dich ja besuchen!","Exactly. And we could visit you!"],
+  ["Mia","Okay. Ich werde am Montag mit meiner Chefin sprechen.","Okay. I'll talk to my boss on Monday."]],
+ qs:[{after:0,q:"Was bietet Mias Firma ihr an?",opts:["eine Stelle in Hamburg","mehr Gehalt","einen längeren Urlaub"],a:"eine Stelle in Hamburg"},
+  {after:4,q:"Was ist das Problem für Mia?",opts:["Sie müsste umziehen","Das Gehalt ist zu niedrig","Sie mag Hamburg nicht"],a:"Sie müsste umziehen"},
+  {after:5,q:"Was würde David an ihrer Stelle machen?",opts:["das Angebot annehmen","in der Stadt bleiben","eine neue Stelle suchen"],a:"das Angebot annehmen"}]},
+];
+let story=null;
+function storyRec(id){return S.stories[id]||{done:false,correct:0};}
+function viewStories(){
+  const done=STORIES.filter(s=>storyRec(s.id).done).length;
+  let html=`<div class="fade"><div class="top"><div><div class="hi">Read, listen & understand</div><div class="title">Stories 📖</div></div><div class="glass streak"><span class="fire">🔥</span>${S.streak}${S.freezes?`<span style="margin-left:6px;font-size:12px;opacity:.85;">🧊${S.freezes}</span>`:""}</div></div>
+    <div class="glass card" style="display:flex;align-items:center;gap:14px;"><div style="font-size:34px;">📖</div><div style="flex:1;"><div style="font-weight:800;">${done} / ${STORIES.length} stories complete</div><div style="font-size:12px;color:var(--txt-faint);margin-top:3px;">Tap a line to see the translation · answer questions for XP</div></div></div>`;
+  let last=null;
+  STORIES.forEach(s=>{
+    if(s.lvl!==last){last=s.lvl;html+=`<div class="sec-label">${s.lvl}</div>`;}
+    const r=storyRec(s.id);
+    html+=`<div class="glass card" style="display:flex;align-items:center;gap:12px;cursor:pointer;padding:14px 16px;" onclick="startStory('${s.id}')">
+      <div style="width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--glass-strong);">${s.emoji}</div>
+      <div style="flex:1;min-width:0;"><div style="font-weight:800;">${s.title}</div><div style="font-size:12px;color:var(--txt-faint);">${s.lvl} · ${s.lines.length} lines · ${s.qs.length} questions</div></div>
+      <div style="font-size:18px;color:${r.done?'var(--good)':'var(--txt-faint)'};">${r.done?"✓":"›"}</div></div>`;
+  });
+  html+=`</div>`;return html;
+}
+window.startStory=id=>{const s=STORIES.find(x=>x.id===id);if(!s)return;story={s,idx:0,answered:{},correct:0,pendingQ:null,reveal:{}};view="story";render();speak(s.lines[0][1]);};
+function storyQFor(idx){const s=story.s;for(let i=0;i<s.qs.length;i++){if(s.qs[i].after===idx&&!story.answered[i])return i;}return -1;}
+function viewStory(){
+  const s=story.s;const atEnd=story.idx>=s.lines.length-1;
+  let html=`<div class="center"><div class="fade">
+    <div class="q-head"><div class="glass q-back" onclick="story=null;view='stories';render();">←</div><div class="q-prog"><i style="width:${Math.round(100*(story.idx+1)/s.lines.length)}%"></i></div><div class="q-x">${s.emoji}</div></div>
+    <div class="glass card" style="padding:16px;"><div style="font-weight:800;font-size:17px;">${s.emoji} ${s.title} <span class="lvtag" style="margin-left:6px;">${s.lvl}</span></div>
+    <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px;">`;
+  for(let i=0;i<=story.idx;i++){const[who,de,en]=s.lines[i];const right=i%2===1;
+    html+=`<div style="display:flex;flex-direction:column;align-items:${right?'flex-end':'flex-start'};" onclick="storyReveal(${i})">
+      <div style="font-size:11px;color:var(--txt-faint);margin:0 6px 2px;">${who}</div>
+      <div class="glass" style="max-width:88%;padding:10px 14px;border-radius:16px;cursor:pointer;${i===story.idx?'border-color:var(--accent);':''}">
+        <div style="font-weight:700;">${de} <span style="opacity:0.55;font-size:12px;" onclick="event.stopPropagation();speak('${esc(de)}')">🔊</span></div>
+        ${story.reveal[i]?`<div style="font-size:13px;color:var(--txt-dim);margin-top:4px;">${en}</div>`:""}
+      </div></div>`;}
+  html+=`</div></div>`;
+  const qi=storyQFor(story.idx);
+  if(qi>=0&&story.pendingQ===qi){
+    const q=s.qs[qi];
+    html+=`<div class="glass prompt pop" style="margin-top:14px;"><div class="small">Question</div><div style="font-size:18px;font-weight:800;">${q.q}</div></div>
+      <div class="feedback" id="fb"></div>
+      <div class="opts" id="opts">${q.opts.map((o,i)=>`<div class="opt" onclick="storyAnswer(${qi},${i},this)">${o}</div>`).join("")}</div>`;
+  }else{
+    html+=`<div style="margin-top:16px;">${(qi<0&&atEnd)?`<button class="btn" onclick="storyDone()">Finish story 🎉</button>`:`<button class="btn" onclick="storyNext()">Weiter →</button>`}</div>`;
+  }
+  html+=`</div></div>`;
+  screen.innerHTML=html;renderTabs();
+  requestAnimationFrame(()=>{const sc=document.scrollingElement||document.documentElement;sc.scrollTop=sc.scrollHeight;});
+}
+window.storyReveal=i=>{story.reveal[i]=!story.reveal[i];render();};
+window.storyNext=()=>{
+  const qi=storyQFor(story.idx);
+  if(qi>=0){story.pendingQ=qi;render();return;}
+  if(story.idx<story.s.lines.length-1){story.idx++;render();speak(story.s.lines[story.idx][1]);}
+};
+window.storyAnswer=(qi,oi,el)=>{
+  const q=story.s.qs[qi];if(story.answered[qi])return;story.answered[qi]=true;story.pendingQ=null;
+  const correct=q.opts[oi]===q.a;
+  document.querySelectorAll("#opts .opt").forEach((o,j)=>{if(q.opts[j]===q.a)o.classList.add("correct");else if(j===oi)o.classList.add("wrong");else o.classList.add("dim");});
+  if(correct){story.correct++;sfx("ok");haptic(30);rollDay();S.xp+=6;S.todayXP+=6;markActive();save();}
+  else{sfx("no");haptic([40,30,40]);}
+  setTimeout(()=>{if(story.idx<story.s.lines.length-1){story.idx++;render();speak(story.s.lines[story.idx][1]);}else render();},correct?800:1600);
+};
+window.storyDone=()=>{
+  const s=story.s;const r=storyRec(s.id);const firstTime=!r.done;
+  S.stories[s.id]={done:true,correct:Math.max(r.correct,story.correct)};
+  const bonus=firstTime?20:8;rollDay();S.xp+=bonus;S.todayXP+=bonus;markActive();
+  if(firstTime)questBump("story",1);questBump("xp",S.todayXP,"set");save();checkAch();
+  confetti();sfx("win");
+  screen.innerHTML=`<div class="center"><div class="glass result pop"><div class="em">📖</div><div class="score">${story.correct}/${s.qs.length}</div>
+    <h2>Story complete!</h2><p>“${s.title}” · +${bonus} XP${firstTime?" (first read!)":""} + ${story.correct*6} XP from questions</p>
+    <button class="btn" onclick="story=null;view='stories';render();">More stories</button>
+    <button class="btn ghost" style="margin-top:12px;" onclick="story=null;view='today';render();">Done</button></div></div>`;
+  renderTabs();story=null;
+};
+/* speaking practice mode */
+function startSpeaking(){
+  if(!SR_OK)return toast("Speech recognition isn't supported in this browser — try Chrome");
+  const pool=PHRASES.filter(p=>LV[p.lvl]<=LV[S.cefr]).map(p=>"p:"+p.de).filter(id=>REGMAP[id]);
+  if(!pool.length)return toast("No phrases at this level yet");
+  sess={queue:shuffle(pool).slice(0,8),answered:0,correct:0,combo:0,maxCombo:0,relearn:new Set(),mode:"normal",forceSpeak:true,log:[]};runSession();
+}
+window.startSpeaking=startSpeaking;
+
+/* ===================== CURRICULUM / MAP (themed course, Duolingo-style) ===================== */
+const UNITS=[
+/* ---------- A1 ---------- */
+{lvl:"A1",title:"First Words",emoji:"👋",cats:["Greetings"],catN:10,
+ phrases:["Wie geht es dir?","Mir geht es gut, danke.","Wie bitte?"],
+ gTopics:["Personal pronouns","sein / haben"],verbs:[["sein","present"],["haben","present"]],
+ tip:{t:"Hallo! · sein & haben",h:"<p>Two verbs power half of German: <b>sein</b> (to be) and <b>haben</b> (to have).</p><ul><li>ich <b>bin</b> · du <b>bist</b> · er/sie <b>ist</b> · wir <b>sind</b> · ihr <b>seid</b> · sie/Sie <b>sind</b></li><li>ich <b>habe</b> · du <b>hast</b> · er/sie <b>hat</b> · wir <b>haben</b> · ihr <b>habt</b> · sie/Sie <b>haben</b></li><li>Use <b>du</b> with friends, <b>Sie</b> (capital S) to be polite.</li></ul>"}},
+{lvl:"A1",title:"About Me",emoji:"🙋",
+ phrases:["Wie heißt du?","Ich heiße ...","Woher kommst du?","Ich komme aus Italien.","Wo wohnst du?","Ich wohne in Berlin.","Ich spreche ein bisschen Deutsch.","Sprechen Sie Englisch?"],
+ gTopics:["Question words","Word order (V2)"],verbs:[["heißen","present"],["kommen","present"],["wohnen","present"]],
+ tip:{t:"Introducing yourself",h:"<p>The golden rule of German word order: <b>the verb is always in 2nd position</b>.</p><ul><li><i>Ich <b>wohne</b> in Berlin.</i> — <i>Heute <b>wohne</b> ich in Berlin.</i></li><li>Questions with a question word: <i><b>Wo</b> wohnst du?</i></li><li>Yes/no questions start with the verb: <i><b>Sprichst</b> du Deutsch?</i></li></ul>"}},
+{lvl:"A1",title:"Numbers & Time",emoji:"🔢",cats:["Numbers","Time"],catN:8,
+ phrases:["Es ist zehn Uhr.","Der Zug fährt um acht Uhr."],
+ gTopics:["Time & numbers"],verbs:[["warten","present"]],
+ tip:{t:"Telling the time",h:"<ul><li><b>um</b> + clock time: <i>um acht Uhr</i> (at 8).</li><li>⚠️ <b>halb drei</b> = 2:30 (half-way <i>to</i> three, not past two!).</li><li>Numbers flip: <b>einundzwanzig</b> = one-and-twenty = 21.</li></ul>"}},
+{lvl:"A1",title:"Family & Friends",emoji:"👪",cats:["Family"],catN:8,
+ phrases:["Das ist meine Familie.","Ich habe zwei Brüder."],
+ gTopics:["Possessives","Plurals"],verbs:[["spielen","present"],["lernen","present"]],
+ tip:{t:"My, your & plurals",h:"<ul><li><b>mein</b> (my), <b>dein</b> (your) — they take endings like <i>ein</i>: <i>mein Bruder, meine Mutter</i>.</li><li>German plurals vary: <i>Kind → Kind<b>er</b></i>, <i>Apfel → <b>Ä</b>pfel</i>. Learn each noun with its plural!</li></ul>"}},
+{lvl:"A1",title:"Food & Drink",emoji:"🍎",cats:["Food"],catN:8,
+ phrases:["Ich habe Hunger.","Ich habe Durst.","Ich möchte einen Kaffee.","Das schmeckt sehr gut.","Guten Appetit!","Ich nehme das Schnitzel.","Die Rechnung, bitte.","Haben Sie einen Tisch für zwei?","Wie viel kostet das?"],
+ gTopics:["Articles (der/die/das)","Negation"],verbs:[["machen","present"],["trinken","present"]],
+ tip:{t:"der, die, das & ordering food",h:"<p>Every German noun has a gender: <b>der</b> (m), <b>die</b> (f), <b>das</b> (n). Always learn the article with the word!</p><ul><li>Order politely with <i>Ich möchte …</i> / <i>Ich nehme …</i></li><li>Negate nouns with <b>kein</b>: <i>Ich habe <b>kein</b> Auto.</i> Negate verbs with <b>nicht</b>.</li></ul>"}},
+{lvl:"A1",title:"Colors & Things",emoji:"🎨",cats:["Colors","Objects"],catN:8,
+ gTopics:["Accusative"],verbs:[["kaufen","present"],["brauchen","present"]],
+ tip:{t:"The accusative case",h:"<p>The direct object changes only for masculine words:</p><ul><li><b>der → den</b>: <i>Ich sehe <b>den</b> Hund.</i> · <b>ein → einen</b>: <i>Ich kaufe <b>einen</b> Tisch.</i></li><li><i>die</i> and <i>das</i> stay the same. Easy!</li></ul>"}},
+{lvl:"A1",title:"Out & About",emoji:"✈️",cats:["Travel","Animals"],catN:8,
+ phrases:["Wo ist der Bahnhof?","Eine Fahrkarte nach München, bitte.","Gehen Sie geradeaus.","Wo ist die Toilette?","Ich verstehe nicht.","Das Wetter ist schön heute.","Es regnet.","Mir ist kalt.","Bis morgen!","Bis später!"],
+ verbs:[["gehen","present"],["fahren","present"]],
+ tip:{t:"Asking your way",h:"<ul><li><b>Wo ist …?</b> = Where is …? — the survival question.</li><li><b>gehen</b> = to go on foot, <b>fahren</b> = to go by vehicle.</li><li>Small talk starter: <i>Das Wetter ist schön, oder?</i></li></ul>"}},
+/* ---------- A2 ---------- */
+{lvl:"A2",title:"My Day",emoji:"📅",
+ phrases:["Ich stehe jeden Tag um sechs auf.","Zuerst frühstücke ich, dann dusche ich.","Wie spät ist es?"],
+ gTopics:["Separable verbs","Time prepositions"],verbs:[["arbeiten","present"],["schlafen","present"],["lesen","present"]],
+ tip:{t:"Separable verbs",h:"<p>Many verbs split in two: <b>auf</b>stehen → <i>Ich stehe um 6 Uhr <b>auf</b>.</i></p><ul><li>The prefix flies to the <b>end</b> of the sentence.</li><li>Time prepositions: <b>am</b> Montag · <b>im</b> Mai · <b>um</b> 8 Uhr · <b>seit</b> 2 Jahren.</li></ul>"}},
+{lvl:"A2",title:"Work & School",emoji:"💼",
+ words:["der Beruf","die Firma","das Büro","der Kollege","die Besprechung","der Chef","die Pause","verdienen"],
+ phrases:["Ich muss heute lange arbeiten.","Können Sie mir helfen?","Kannst du das bitte wiederholen?","Ich habe die Hausaufgaben gemacht."],
+ gTopics:["Modal verbs"],verbs:[["können","present"],["müssen","present"],["schreiben","present"]],
+ tip:{t:"Modal verbs",h:"<p>Modals express can/must/want. They sit in position 2, the main verb goes to the end as infinitive:</p><ul><li><i>Ich <b>kann</b> heute nicht <b>kommen</b>.</i></li><li>ich/er kann · muss · will · darf — <b>same form for ich and er!</b></li></ul>"}},
+{lvl:"A2",title:"Shopping",emoji:"🛍️",
+ words:["billig","teuer","bequem","modern","hübsch"],
+ phrases:["Welche Größe haben Sie?","Kann ich das anprobieren?","Das ist mir zu teuer.","Gibt es das auch in Blau?"],
+ gTopics:["Comparatives","Accusative pronouns"],verbs:[["wollen","present"],["dürfen","present"]],
+ tip:{t:"Comparing things",h:"<ul><li>Comparative: add <b>-er</b> → <i>billig<b>er</b> als</i> (cheaper than).</li><li>Superlative: <i>am billigsten</i> / <i>der billigste</i>.</li><li>Irregular: gut → <b>besser</b> → am besten.</li></ul>"}},
+{lvl:"A2",title:"Talking About Yesterday",emoji:"🕰️",
+ phrases:["Was hast du gestern gemacht?","Ich habe meine Freunde getroffen.","Wir sind ins Kino gegangen.","Der Film war wirklich spannend.","Ich bin gestern spät nach Hause gekommen."],
+ gTopics:["Perfekt tense"],verbs:[["machen","perfekt"],["gehen","perfekt"],["kommen","perfekt"],["sehen","perfekt"],["essen","perfekt"],["fahren","perfekt"]],
+ tip:{t:"The Perfekt (spoken past)",h:"<p>Germans talk about the past with <b>haben/sein + participle</b>:</p><ul><li><i>Ich <b>habe</b> Pizza <b>gegessen</b>.</i></li><li>Movement & change use <b>sein</b>: <i>Ich <b>bin</b> nach Hause <b>gegangen</b>.</i></li><li>The participle always goes to the end.</li></ul>"}},
+{lvl:"A2",title:"Health",emoji:"⚕️",cats:["Health"],catN:6,
+ words:["der Kopf","der Bauch","das Fieber","der Husten","die Erkältung","die Apotheke","das Medikament","der Arzt","die Tablette"],
+ phrases:["Ich habe Kopfschmerzen.","Ich fühle mich nicht gut.","Gute Besserung!","Ich muss zum Arzt gehen.","Ich möchte einen Termin machen."],
+ gTopics:["Imperative","Dative"],verbs:[["helfen","present"]],
+ tip:{t:"At the doctor · dative",h:"<ul><li>Some verbs always take the dative: <i>helfen, gehören, danken</i> → <i>Kannst du <b>mir</b> helfen?</i></li><li>Commands: <i>Warten <b>Sie</b> bitte!</i> (formal) · <i><b>Sprich</b> langsamer!</i> (du).</li></ul>"}},
+{lvl:"A2",title:"Home & City",emoji:"🏠",cats:["Home"],catN:6,
+ words:["die Wohnung","das Zimmer","die Küche","das Bad","der Schlüssel","die Miete","der Nachbar","umziehen"],
+ phrases:["Der Bus hat Verspätung.","Ich bin mit dem Fahrrad gefahren.","Darf ich hier parken?"],
+ gTopics:["Cases (dative)","Cases (accusative)"],verbs:[["bleiben","present"],["laufen","present"]],
+ tip:{t:"Prepositions & cases",h:"<ul><li>Always dative: <b>mit, nach, bei, seit, von, zu, aus</b> → <i>mit <b>dem</b> Bus</i>.</li><li>Always accusative: <b>für, ohne, gegen, durch, um</b> → <i>für <b>den</b> Chef</i>.</li></ul>"}},
+{lvl:"A2",title:"Free Time & Plans",emoji:"🎉",cats:["Feelings"],catN:5,
+ words:["glücklich","traurig","wütend","nervös","aufgeregt","die Angst"],
+ phrases:["Hast du am Wochenende Zeit?","Wir treffen uns um sieben.","Ich freue mich auf den Sommer.","Es tut mir leid, ich habe keine Zeit.","Das macht nichts."],
+ gTopics:["Conjunctions"],verbs:[["glauben","present"]],
+ tip:{t:"dass, wenn & denn",h:"<ul><li><b>dass</b> and <b>wenn</b> kick the verb to the end: <i>Ich glaube, dass er Recht <b>hat</b>.</i></li><li><b>denn</b> (because) keeps normal order: <i>…, denn ich <b>bin</b> müde.</i></li></ul>"}},
+/* ---------- B1 ---------- */
+{lvl:"B1",title:"Connecting Ideas",emoji:"🧩",
+ phrases:["Ich bin der Meinung, dass Sport wichtig ist.","Ich schlage vor, dass wir früher anfangen.","Obwohl es regnete, sind wir gewandert.","Soweit ich weiß, ist das richtig."],
+ gTopics:["Word order (subordinate)","Indirect questions"],verbs:[["wissen","present"]],
+ tip:{t:"Subordinate clauses",h:"<p>After <b>weil, dass, obwohl, wenn</b>… the conjugated verb moves to the very end:</p><ul><li><i>…, weil ich das Buch gelesen <b>habe</b>.</i></li><li>Same in indirect questions: <i>Weißt du, wann der Zug <b>kommt</b>?</i></li></ul>"}},
+{lvl:"B1",title:"Opinions & Discussion",emoji:"🗣️",
+ words:["die Meinung","der Vorschlag","der Vorteil","der Nachteil"],
+ phrases:["Meiner Meinung nach ...","Es kommt darauf an.","Ich bin damit einverstanden.","Das ist mir egal.","Ich habe keine Ahnung.","Ich bin ganz deiner Meinung.","Da bin ich anderer Meinung.","Einerseits stimmt das, andererseits nicht.","Wir müssen einen Kompromiss finden.","Das kommt überhaupt nicht in Frage."],
+ verbs:[["finden","present"]],
+ tip:{t:"Giving your opinion",h:"<ul><li><i>Meiner Meinung nach …</i> — in my opinion (verb comes right after!).</li><li>Agree: <i>Ich bin ganz deiner Meinung.</i> · Disagree politely: <i>Da bin ich anderer Meinung.</i></li><li>These set phrases are exactly what B1 speaking exams want.</li></ul>"}},
+{lvl:"B1",title:"Wishes & Politeness",emoji:"💭",
+ phrases:["Wenn ich Zeit hätte, würde ich mehr lesen.","An deiner Stelle würde ich das machen.","Es wäre schön, wenn du kommen könntest.","Könntest du mir einen Gefallen tun?","Könnten Sie mir das genauer erklären?"],
+ gTopics:["Konjunktiv II"],verbs:[["sein","k2"],["haben","k2"]],
+ tip:{t:"Konjunktiv II — would/could",h:"<ul><li><b>würde + infinitive</b> = would: <i>Ich <b>würde</b> mehr lesen.</i></li><li>Short forms you must know: <b>wäre</b> (would be), <b>hätte</b> (would have), <b>könnte</b> (could).</li><li>Perfect for polite requests: <i><b>Könnten</b> Sie mir helfen?</i></li></ul>"}},
+{lvl:"B1",title:"Reflexives & Prepositions",emoji:"🔁",
+ phrases:["Ich interessiere mich für Geschichte.","Es hängt vom Wetter ab.","Mach dir keine Sorgen!","Ich habe es mir anders überlegt."],
+ gTopics:["Reflexive verbs","Verbs + prepositions","Two-way prepositions","Prepositions (dative)"],verbs:[["stehen","present"]],
+ tip:{t:"sich freuen auf & friends",h:"<ul><li>Reflexive verbs need a pronoun: <i>Ich freue <b>mich</b>, du freust <b>dich</b>…</i></li><li>Many verbs come glued to a preposition — learn them as one chunk: <b>warten auf</b>, <b>sich interessieren für</b>, <b>denken an</b>.</li><li>Two-way prepositions: place (wo?) → dative, motion (wohin?) → accusative.</li></ul>"}},
+{lvl:"B1",title:"Jobs & Applications",emoji:"📋",
+ words:["die Bewerbung","das Vorstellungsgespräch","der Lebenslauf","das Gehalt","die Erfahrung","die Stelle","der Vertrag","kündigen","einstellen","die Weiterbildung"],
+ phrases:["Ich habe mich um die Stelle beworben.","Der Termin wurde auf Montag verschoben.","Immer mehr Leute arbeiten von zu Hause."],
+ gTopics:["Passive"],verbs:[["werden","present"]],
+ tip:{t:"The passive voice",h:"<ul><li>Present: <b>wird</b> + participle → <i>Das Brot <b>wird gebacken</b>.</i></li><li>Past: <b>wurde</b> + participle → <i>Der Termin <b>wurde verschoben</b>.</i></li><li>Very common in news, work emails and official German.</li></ul>"}},
+{lvl:"B1",title:"Past & Stories",emoji:"📜",
+ words:["die Erinnerung","das Erlebnis"],
+ gTopics:["als / wenn","Präteritum","Relative clauses"],verbs:[["sein","praet"],["haben","praet"]],
+ tip:{t:"Telling stories",h:"<ul><li>In writing, use Präteritum for <b>sein/haben/modals</b>: <i>ich <b>war</b>, ich <b>hatte</b>, ich <b>konnte</b></i>.</li><li><b>als</b> = one single past event: <i><b>Als</b> ich ein Kind war…</i> · <b>wenn</b> = whenever/if.</li><li>Relative clauses: <i>Die Frau, <b>die</b> dort wohnt, …</i> (verb at the end).</li></ul>"}},
+{lvl:"B1",title:"Describing Things",emoji:"🧲",
+ words:["zuverlässig","gemütlich","anstrengend","erfolgreich","notwendig","ähnlich","deutlich","verantwortlich"],
+ gTopics:["Adjective endings","Genitive"],verbs:[["bringen","present"],["denken","present"]],
+ tip:{t:"Adjective endings & genitive",h:"<ul><li>After <b>der/die/das</b>: mostly <b>-e/-en</b> → <i>der klein<b>e</b> Hund, den klein<b>en</b> Hund</i>.</li><li>After <b>ein</b>: the adjective shows the gender → <i>ein gut<b>er</b> Film, ein gut<b>es</b> Buch</i>.</li><li>Genitive = possession: <i>das Auto <b>meines Vaters</b></i>, <i>wegen <b>des</b> Wetters</i>.</li></ul>"}},
+{lvl:"B1",title:"Goals & Future",emoji:"🚀",
+ words:["das Ziel","die Entscheidung","die Möglichkeit","die Hoffnung","die Sorge","die Umwelt","die Nachrichten","die Gesellschaft"],
+ phrases:["Ich habe vor, im Sommer nach Deutschland zu fahren.","Es lohnt sich auf jeden Fall.","Je mehr ich lerne, desto besser spreche ich.","Ich bin gespannt, wie es weitergeht."],
+ gTopics:["Future","um … zu","lassen"],verbs:[["treffen","present"],["nehmen","present"],["geben","present"]],
+ tip:{t:"Future & purpose",h:"<ul><li>Future: <b>werden</b> + infinitive → <i>Ich <b>werde</b> dich <b>anrufen</b>.</i> (Often just present + <i>morgen</i>!)</li><li>Purpose: <b>um … zu</b> → <i>Ich lerne Deutsch, <b>um</b> in Berlin <b>zu</b> arbeiten.</i></li><li>Finish this unit and you've covered the core B1 grammar. 🎓</li></ul>"}},
+];
+function unitItems(u){
+  const ids=[];
+  (u.cats||[]).forEach(c=>{VOCAB.filter(v=>v.cat===c&&v.lvl===u.lvl).slice(0,u.catN||8).forEach(v=>ids.push("v:"+v.de));});
+  (u.words||[]).forEach(w=>ids.push("v:"+w));
+  (u.phrases||[]).forEach(p=>ids.push("p:"+p));
+  GRAMMAR.forEach((g,i)=>{if(g.lvl===u.lvl&&(u.gTopics||[]).includes(g.topic))ids.push("g:"+i);});
+  (u.verbs||[]).forEach(v=>ids.push("vb:"+v[0]+":"+v[1]));
+  return [...new Set(ids)].filter(id=>REGMAP[id]);
+}
+const LESSONS=(function(){
+  const out=[];const per=7;
+  UNITS.forEach((u,ui)=>{
+    u.idx=ui;const items=unitItems(u);u.items=items;
+    const nles=Math.max(1,Math.ceil(items.length/per));
+    for(let k=0;k<nles;k++){const ids=items.slice(k*per,(k+1)*per);if(!ids.length)break;
+      out.push({id:"u"+ui+"|L"+k,lvl:u.lvl,unit:ui,skill:REGMAP[ids[0]].skill,items:ids,title:u.title+(nles>1?" · "+(k+1):""),first:k===0});}
+    if(items.length>=10)out.push({id:"u"+ui+"|C",lvl:u.lvl,unit:ui,skill:REGMAP[items[0]].skill,items:items.slice(),check:true,title:u.title+" · Checkpoint"});
+  });
+  out.forEach((l,i)=>l.idx=i);return out;
+})();
 const lvlLessons=lvl=>LESSONS.filter(l=>l.lvl===lvl);
 function lsRec(L){return S.lessons[L.id]||{done:false,stars:0,best:0};}
 function lsDone(L){return !!(S.lessons[L.id]&&S.lessons[L.id].done);}
-function lsUnlocked(i){return i===0||lsDone(LESSONS[i-1]);}
-function currentLessonIdx(){for(let i=0;i<LESSONS.length;i++){if(lsUnlocked(i)&&!lsDone(LESSONS[i]))return i;}return LESSONS.length-1;}
-function startLesson(i){if(!lsUnlocked(i)){toast("🔒 Finish the previous lesson first");sfx("no");return;}const L=LESSONS[i];S.cefr=L.lvl;save();const q=shuffle(L.items.slice()).slice(0,Math.min(10,L.items.length));sess={queue:q,answered:0,correct:0,combo:0,maxCombo:0,relearn:new Set(),mode:"lesson",lessonIdx:i,log:[]};runSession();}
+/* unlocked: previous done, OR this is the first lesson of a level at/below your chosen CEFR (lets you jump ahead when you set your level) */
+function lsUnlocked(i){if(i===0)return true;if(lsDone(LESSONS[i-1]))return true;const L=LESSONS[i],P=LESSONS[i-1];return P.lvl!==L.lvl&&LV[L.lvl]<=LV[S.cefr];}
+function currentLessonIdx(){let fb=-1;for(let i=0;i<LESSONS.length;i++){if(lsUnlocked(i)&&!lsDone(LESSONS[i])){if(LESSONS[i].lvl===S.cefr)return i;if(fb<0)fb=i;}}return fb>=0?fb:LESSONS.length-1;}
+function startLesson(i,skipTip){
+  if(!lsUnlocked(i)){toast("🔒 Finish the previous lesson first");sfx("no");return;}
+  const L=LESSONS[i];const u=UNITS[L.unit];
+  if(!skipTip&&L.first&&u.tip&&!S.tipsSeen["u"+L.unit]){renderTip(L.unit,i);return;}
+  S.cefr=L.lvl;save();
+  const q=shuffle(L.items.slice()).slice(0,Math.min(10,L.items.length));
+  sess={queue:q,answered:0,correct:0,combo:0,maxCombo:0,relearn:new Set(),mode:"lesson",lessonIdx:i,log:[]};runSession();
+}
 window.startLesson=startLesson;
+/* grammar tip screen (shown before a unit's first lesson, and from the map) */
+function renderTip(ui,nextLesson){
+  const u=UNITS[ui];S.tipsSeen["u"+ui]=true;save();
+  screen.innerHTML=`<div class="center"><div class="fade">
+    <div class="q-head"><div class="glass q-back" onclick="view='map';sess=null;render();">←</div><div class="q-prog"><i style="width:0%"></i></div><div class="q-x">💡</div></div>
+    <div class="glass prompt pop" style="text-align:left;">
+      <span class="lvtag">${u.lvl} · TIPP</span>
+      <div style="font-size:34px;margin:6px 0 2px;">${u.emoji}</div>
+      <div style="font-size:21px;font-weight:800;margin-bottom:10px;">${u.tip.t}</div>
+      <div class="tipbody" style="font-size:15px;line-height:1.65;color:var(--txt-dim);">${u.tip.h}</div>
+    </div>
+    ${nextLesson!=null?`<button class="btn" onclick="startLesson(${nextLesson},true)">Los geht's — start lesson →</button>`:`<button class="btn" onclick="view='map';render();">Back to map</button>`}
+  </div></div>`;renderTabs();
+}
+window.showTip=ui=>renderTip(ui,null);
 function viewMap(){
   const cur=currentLessonIdx();const doneCount=LESSONS.filter(lsDone).length;
-  let html=`<div class="fade"><div class="top"><div><div class="hi">Your learning path</div><div class="title">Map</div></div><div class="glass streak"><span class="fire">🔥</span>${S.streak}</div></div>
+  let html=`<div class="fade"><div class="top"><div><div class="hi">Your learning path</div><div class="title">Map</div></div><div class="glass streak"><span class="fire">🔥</span>${S.streak}${S.freezes?`<span style="margin-left:6px;font-size:12px;opacity:.85;">🧊${S.freezes}</span>`:""}</div></div>
    <div class="glass card" style="display:flex;align-items:center;gap:14px;"><div style="font-size:34px;">🗺️</div><div style="flex:1;"><div style="font-weight:800;">${doneCount} / ${LESSONS.length} lessons complete</div><div class="bar" style="margin-top:8px;height:10px;"><i style="width:${Math.round(100*doneCount/LESSONS.length)}%;background:linear-gradient(90deg,var(--good),var(--accent));"></i></div></div></div>`;
-  let lastLvl=null;
+  let lastLvl=null,lastUnit=null;
   LESSONS.forEach((L,i)=>{
     if(L.lvl!==lastLvl){lastLvl=L.lvl;const lv=lvlLessons(L.lvl);const dn=lv.filter(lsDone).length;html+=`<div class="map-lvl"><span>${L.lvl}${dn===lv.length?" 👑":""}</span><span>${dn}/${lv.length}</span></div>`;}
+    if(L.unit!==lastUnit){lastUnit=L.unit;const u=UNITS[L.unit];const ul=LESSONS.filter(x=>x.unit===L.unit);const udn=ul.filter(lsDone).length;
+      html+=`<div class="glass card" style="display:flex;align-items:center;gap:12px;padding:14px 16px;margin:16px 0 4px;">
+        <div style="font-size:28px;">${u.emoji}</div>
+        <div style="flex:1;min-width:0;"><div style="font-weight:800;">${u.title}</div><div style="font-size:12px;color:var(--txt-faint);">${u.lvl} · ${udn}/${ul.length} lessons</div></div>
+        ${u.tip?`<div class="glass" style="padding:8px 12px;border-radius:12px;cursor:pointer;font-size:13px;font-weight:800;" onclick="showTip(${L.unit})">💡 Tipp</div>`:""}</div>`;}
     const done=lsDone(L),unlocked=lsUnlocked(i),isCur=i===cur;const rec=lsRec(L);
     const side=i%2===0?"l":"r";
     const cls="node "+(done?"done":unlocked?"open":"lock")+(isCur?" cur":"");
     const stars=done?`<div class="stars">${"★".repeat(rec.stars)}${"☆".repeat(3-rec.stars)}</div>`:"";
-    const ic=done?"✓":unlocked?SKILLS[L.skill].emoji:"🔒";
+    const ic=done?"✓":unlocked?(L.check?"🏁":SKILLS[L.skill].emoji):"🔒";
     const tap=unlocked?`onclick="startLesson(${i})"`:`onclick="toast('🔒 Locked — finish earlier lessons')"`;
-    html+=`<div class="noderow ${side}">${isCur?`<span class="mapmascot">🐼</span>`:""}<div class="${cls}" ${tap}><div class="nic">${ic}</div>${stars}</div><div class="nlabel">${L.title}<span>${L.lvl} · ${SKILLS[L.skill].name}</span></div></div>`;
+    html+=`<div class="noderow ${side}">${isCur?`<span class="mapmascot">🐼</span>`:""}<div class="${cls}" ${tap}><div class="nic">${ic}</div>${stars}</div><div class="nlabel">${L.title}<span>${L.lvl} · ${L.check?"Unit test":SKILLS[L.skill].name}</span></div></div>`;
   });
   html+=`</div>`;return html;
 }
 
+/* ===================== DAILY QUESTS ===================== */
+const QUEST_POOL=[
+  {id:"xp",e:"⚡",t:"Earn {g} XP today",goals:[60,120,200],bonus:20},
+  {id:"correct",e:"🎯",t:"Answer {g} questions correctly",goals:[15,25,40],bonus:20},
+  {id:"lesson",e:"📘",t:"Complete {g} lessons",goals:[1,2,3],bonus:25},
+  {id:"story",e:"📖",t:"Read {g} story",goals:[1,1,2],bonus:25},
+  {id:"perfect",e:"💯",t:"Finish a lesson with 100%",goals:[1,1,2],bonus:30},
+  {id:"combo",e:"🔥",t:"Hit a {g}-answer combo",goals:[5,8,12],bonus:20},
+  {id:"review",e:"🔁",t:"Review {g} weak items",goals:[5,10,15],bonus:20},
+];
+function questDef(id){return QUEST_POOL.find(q=>q.id===id);}
+function questTier(){return S.xp>3000?2:S.xp>800?1:0;}
+function pickQuests(){
+  const t=todayStr();let s=0;for(let i=0;i<t.length;i++)s=(s*31+t.charCodeAt(i))|0;s=Math.abs(s)||7;
+  const pool=QUEST_POOL.slice(),out=[],tier=questTier();
+  for(let i=0;i<3&&pool.length;i++){s=(s*1103515245+12345)&0x7fffffff;const q=pool.splice(s%pool.length,1)[0];out.push({id:q.id,goal:q.goals[tier],prog:0,done:false});}
+  return out;
+}
+function ensureQuests(){const t=todayStr();if(!S.quests||S.quests.date!==t){S.quests={date:t,list:pickQuests()};save();}return S.quests.list;}
+/* mode: "inc" (default) | "max" | "set" */
+function questBump(id,val,mode){
+  ensureQuests();const q=S.quests.list.find(x=>x.id===id);if(!q||q.done)return;
+  if(mode==="max")q.prog=Math.max(q.prog,val);else if(mode==="set")q.prog=val;else q.prog+=(val||1);
+  if(q.prog>=q.goal){q.done=true;const d=questDef(id);S.xp+=d.bonus;S.todayXP+=d.bonus;
+    setTimeout(()=>{sfx("win");toast("✅ Quest complete · +"+d.bonus+" XP");confetti();},400);}
+  save();
+}
+function questCard(){
+  const list=ensureQuests();const alldone=list.every(q=>q.done);
+  return `<div class="glass card"><div class="sec-label" style="margin:0 0 10px;">Daily quests ${alldone?"· all done! 🎉":"· reset at midnight"}</div>
+    ${list.map(q=>{const d=questDef(q.id);const pct=Math.min(100,Math.round(100*q.prog/q.goal));
+      return `<div class="flaw"><div class="ic">${q.done?"✅":d.e}</div><div class="body"><div class="n" style="font-size:14px;">${d.t.replace("{g}",q.goal)}</div>
+        <div class="bar"><i style="width:${pct}%;background:${q.done?'var(--good)':'var(--gold)'};"></i></div>
+        <div style="font-size:11px;color:var(--txt-faint);margin-top:5px;">${Math.min(q.prog,q.goal)}/${q.goal} · +${d.bonus} XP</div></div></div>`;}).join("")}</div>`;
+}
+
+/* ===================== ACHIEVEMENTS ===================== */
+function totalAnswered(){return Object.values(S.skill).reduce((a,s)=>a+s.c+s.w,0);}
+function masteredCount(){return Object.values(S.mem).filter(m=>m.stage==="mastered").length;}
+function storiesRead(){return Object.values(S.stories||{}).filter(x=>x.done).length;}
+const ACHIEVEMENTS=[
+  {id:"first",e:"🐣",t:"Erste Schritte",d:"Answer your first question",c:()=>totalAnswered()>=1},
+  {id:"xp500",e:"⚡",t:"Stromquelle",d:"Reach 500 XP",c:()=>S.xp>=500},
+  {id:"xp2000",e:"🔋",t:"Kraftwerk",d:"Reach 2,000 XP",c:()=>S.xp>=2000},
+  {id:"xp5000",e:"🏆",t:"XP-Meister",d:"Reach 5,000 XP",c:()=>S.xp>=5000},
+  {id:"streak3",e:"🔥",t:"Dranbleiben",d:"Keep a 3-day streak",c:()=>S.streak>=3},
+  {id:"streak7",e:"📅",t:"Eine Woche",d:"Keep a 7-day streak",c:()=>S.streak>=7},
+  {id:"streak30",e:"💎",t:"Eiserner Wille",d:"Keep a 30-day streak",c:()=>S.streak>=30},
+  {id:"les10",e:"📘",t:"Fleißig",d:"Finish 10 lessons",c:()=>LESSONS.filter(lsDone).length>=10},
+  {id:"les40",e:"📚",t:"Bücherwurm",d:"Finish 40 lessons",c:()=>LESSONS.filter(lsDone).length>=40},
+  {id:"a1done",e:"🥉",t:"A1 geschafft",d:"Complete every A1 lesson",c:()=>{const l=lvlLessons("A1");return l.length&&l.every(x=>lsDone(x));}},
+  {id:"a2done",e:"🥈",t:"A2 geschafft",d:"Complete every A2 lesson",c:()=>{const l=lvlLessons("A2");return l.length&&l.every(x=>lsDone(x));}},
+  {id:"b1done",e:"🥇",t:"B1 geschafft",d:"Complete every B1 lesson",c:()=>{const l=lvlLessons("B1");return l.length&&l.every(x=>lsDone(x));}},
+  {id:"story1",e:"📖",t:"Leseratte",d:"Read your first story",c:()=>storiesRead()>=1},
+  {id:"story6",e:"🗞️",t:"Erzähler",d:"Read 6 stories",c:()=>storiesRead()>=6},
+  {id:"storyall",e:"🎞️",t:"Alle Geschichten",d:"Read every story",c:()=>storiesRead()>=STORIES.length},
+  {id:"combo10",e:"🎯",t:"Kombo-König",d:"Hit a 10-answer combo",c:()=>(S.bestCombo||0)>=10},
+  {id:"mastered50",e:"🧠",t:"Gedächtnis",d:"Master 50 items",c:()=>masteredCount()>=50},
+  {id:"mastered200",e:"🦉",t:"Eule",d:"Master 200 items",c:()=>masteredCount()>=200},
+  {id:"speak",e:"🎤",t:"Laut und deutlich",d:"Answer a speaking exercise",c:()=>!!S.spokeOnce},
+  {id:"quest",e:"✅",t:"Tagesheld",d:"Complete all 3 daily quests",c:()=>!!(S.quests&&S.quests.list.length&&S.quests.list.every(q=>q.done))},
+  {id:"exampass",e:"🎓",t:"B1 bestanden",d:"Pass the B1 mock exam",c:()=>((S.exam&&S.exam.best)||0)>=60},
+  {id:"exam80",e:"🌟",t:"Bestnote",d:"Score 80%+ on the B1 exam",c:()=>((S.exam&&S.exam.best)||0)>=80},
+];
+function checkAch(){
+  const un=[];ACHIEVEMENTS.forEach(a=>{try{if(!S.ach[a.id]&&a.c()){S.ach[a.id]=todayStr();un.push(a);}}catch(e){}});
+  if(un.length){save();const a=un[0];setTimeout(()=>{sfx("win");toast(a.e+" Badge unlocked · "+a.t);},900);}
+  return un;
+}
+function achCard(){
+  const got=ACHIEVEMENTS.filter(a=>S.ach[a.id]).length;
+  return `<div class="sec-label">Badges · ${got}/${ACHIEVEMENTS.length}</div>
+    <div class="glass card"><div class="badgegrid">${ACHIEVEMENTS.map(a=>{const on=!!S.ach[a.id];
+      return `<div class="badge2 ${on?'on':''}" onclick="toast('${esc(a.t)} — ${esc(a.d)}')"><div class="be">${on?a.e:"🔒"}</div><div class="bt">${a.t}</div></div>`;}).join("")}</div></div>`;
+}
+
+/* ===================== PLACEMENT TEST ===================== */
+function startPlacement(){
+  const grab=(lvl,n)=>shuffle(REG.filter(it=>it.lvl===lvl&&it.skill!=="verbs")).slice(0,n).map(x=>x.id);
+  const queue=[...grab("A1",5),...grab("A2",5),...grab("B1",6)];
+  if(queue.length<10)return toast("Not enough content to place you yet");
+  sess={queue,answered:0,correct:0,combo:0,maxCombo:0,relearn:new Set(),mode:"placement",log:[]};
+  runSession();
+}
+window.startPlacement=startPlacement;
+function placementResult(){
+  const by={};sess.log.forEach(l=>{const b=by[l.lvl]=by[l.lvl]||{c:0,n:0};b.n++;if(l.correct)b.c++;});
+  let placed="A1";["A1","A2","B1"].forEach(l=>{const b=by[l];if(b&&b.n&&b.c/b.n>=0.6)placed=l;});
+  S.cefr=placed;S.placed=true;
+  let skipped=0;
+  LESSONS.forEach(L=>{if(LV[L.lvl]<LV[placed]&&!lsDone(L)){S.lessons[L.id]={done:true,stars:1,best:60};skipped++;}});
+  save();checkAch();confetti();sfx("win");
+  const rows=["A1","A2","B1"].map(l=>{const b=by[l]||{c:0,n:0};const p=b.n?Math.round(100*b.c/b.n):0;
+    return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--stroke-soft);">
+      <b style="width:34px;">${l}</b><div class="bar" style="flex:1;"><i style="width:${p}%;background:${p>=60?'var(--good)':'var(--bad)'};"></i></div>
+      <span style="font-size:13px;color:var(--txt-dim);width:56px;text-align:right;">${b.c}/${b.n}</span></div>`;}).join("");
+  screen.innerHTML=`<div class="center"><div class="glass result pop"><div class="em">🧭</div><div class="score">${placed}</div>
+    <h2>Your starting level</h2>
+    <p>You answered ${sess.correct}/${sess.answered} correctly.${skipped?` ${skipped} lessons below ${placed} were unlocked for you.`:""}</p>
+    <div class="reslist" style="text-align:left;">${rows}</div>
+    <button class="btn" style="margin-top:16px;" onclick="sess=null;view='map';render();">Start my path →</button>
+    <button class="btn ghost" style="margin-top:12px;" onclick="sess=null;view='today';render();">Go to Today</button></div></div>`;
+  renderTabs();sess=null;
+}
+
+/* ===================== B1 MOCK EXAM ===================== */
+const EXAM_N=30,EXAM_MIN=20;
+let examTimer=null;
+function fmtMS(ms){ms=Math.max(0,ms);const s=Math.round(ms/1000);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");}
+function examLeft(){return sess&&sess.examEnd?sess.examEnd-Date.now():0;}
+function startExam(){
+  const grab=(lvl,n)=>shuffle(REG.filter(it=>it.lvl===lvl)).slice(0,n).map(x=>x.id);
+  const queue=shuffle([...grab("B1",18),...grab("A2",8),...grab("A1",4)]);
+  if(queue.length<EXAM_N)return toast("Not enough B1 content for the exam");
+  sess={queue,answered:0,correct:0,combo:0,maxCombo:0,relearn:new Set(),mode:"exam",log:[],examEnd:Date.now()+EXAM_MIN*60000};
+  clearInterval(examTimer);
+  examTimer=setInterval(()=>{
+    if(!sess||sess.mode!=="exam"){clearInterval(examTimer);examTimer=null;return;}
+    const el=$("#extime");if(el)el.textContent=fmtMS(examLeft());
+    if(examLeft()<=0){clearInterval(examTimer);examTimer=null;sess.timeUp=true;sess.queue=[];showResult();}
+  },300);
+  runSession();
+}
+window.startExam=startExam;
+function examResult(){
+  clearInterval(examTimer);examTimer=null;
+  const total=sess.answered||1;const pct=Math.round(100*sess.correct/total);
+  const pass=pct>=60&&sess.answered>=EXAM_N*0.8;
+  const bySkill={};sess.log.forEach(l=>{const k=l.skill||"vocab";const b=bySkill[k]=bySkill[k]||{c:0,n:0};b.n++;if(l.correct)b.c++;});
+  S.exam=S.exam||{best:0,attempts:0};S.exam.attempts++;S.exam.best=Math.max(S.exam.best||0,pct);
+  rollDay();const xp=sess.correct*6;S.xp+=xp;S.todayXP+=xp;markActive();save();checkAch();
+  if(pass){confetti();sfx("win");}else sfx("no");
+  const rows=Object.keys(bySkill).map(k=>{const b=bySkill[k];const p=Math.round(100*b.c/b.n);
+    return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--stroke-soft);">
+      <span style="width:22px;">${SKILLS[k]?SKILLS[k].emoji:"📒"}</span>
+      <span style="flex:1;font-size:13px;">${SKILLS[k]?SKILLS[k].name:k}</span>
+      <div class="bar" style="width:80px;"><i style="width:${p}%;background:${p>=60?'var(--good)':'var(--bad)'};"></i></div>
+      <span style="font-size:12px;color:var(--txt-dim);width:46px;text-align:right;">${b.c}/${b.n}</span></div>`;}).join("");
+  screen.innerHTML=`<div class="center"><div class="glass result pop"><div class="em">${pass?"🎓":"📚"}</div><div class="score">${pct}%</div>
+    <h2>${pass?"Bestanden! B1 mock exam passed":"Noch nicht bestanden"}</h2>
+    <p>${sess.correct}/${total} correct${sess.timeUp?" · ⏰ time ran out":""} · pass mark 60% · best ${S.exam.best}% · +${xp} XP</p>
+    <div class="reslist" style="text-align:left;">${rows}</div>
+    <button class="btn" style="margin-top:16px;" onclick="startExam()">Retake exam</button>
+    <button class="btn ghost" style="margin-top:12px;" onclick="sess=null;view='practice';render();">Back to practice</button></div></div>`;
+  renderTabs();sess=null;
+}
+
 /* ============================ ROUTER ============================ */
-function render(){if(sess){runSession();return;}if(view==="today")screen.innerHTML=viewToday();else if(view==="learn")screen.innerHTML=viewLearn();else if(view==="practice")screen.innerHTML=viewPractice();else if(view==="insights")screen.innerHTML=viewInsights();else if(view==="map")screen.innerHTML=viewMap();renderTabs();}
+function render(){if(sess){runSession();return;}if(view==="story"&&story){viewStory();return;}if(view==="today")screen.innerHTML=viewToday();else if(view==="learn")screen.innerHTML=viewLearn();else if(view==="practice")screen.innerHTML=viewPractice();else if(view==="insights")screen.innerHTML=viewInsights();else if(view==="map")screen.innerHTML=viewMap();else if(view==="stories")screen.innerHTML=viewStories();renderTabs();}
 render();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script>
